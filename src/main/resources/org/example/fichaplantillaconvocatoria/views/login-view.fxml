@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.fichaplantillaconvocatoria.controllers.loginController.LoginController">
+    <padding>
+        <Insets bottom="40" left="40" right="40" top="40" />
+    </padding>
+    <children>
+        <ImageView fitHeight="100.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/logo.png" />
+            </image>
+        </ImageView>
+        <Label text="Iniciar Sesión" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="28.0" />
+            </font>
+        </Label>
+        <VBox alignment="CENTER" spacing="10.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <children>
+                        <Label minWidth="80" text="Usuario:" textFill="WHITE" />
+                        <TextField fx:id="usuarioField" promptText="Introduce tu usuario" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <children>
+                        <Label minWidth="80" text="Contraseña:" textFill="WHITE" />
+                        <PasswordField fx:id="contrasenaField" promptText="Introduce tu contraseña" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <ToggleButton fx:id="loginButton" minWidth="120" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Acceder" />
+        <Label fx:id="mensajeLabel" text="" textFill="red" />
+    </children>
+</VBox>

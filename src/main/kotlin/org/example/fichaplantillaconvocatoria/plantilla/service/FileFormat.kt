@@ -1,4 +1,8 @@
 package org.example.fichaplantillaconvocatoria.plantilla.service
 
-class FileFormat {
+/**
+ * Data class para distinguir los distintos tipos de ficheros
+ */
+enum class FileFormat {
+    JSON, CSV
 }

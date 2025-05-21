@@ -1,0 +1,423 @@
+/* main.css - Versión mejorada con colores profesionales */
+
+/* Variables de colores */
+* {
+    -fx-primary-color: #1a2a6c;          /* Azul oscuro para elementos principales */
+    -fx-secondary-color: #4CAF50;         /* Verde para acentos y elementos destacados */
+    -fx-dark-gray: #2C3E50;               /* Gris oscuro para fondos y contraste */
+    -fx-medium-gray: #34495E;             /* Gris medio para paneles y elementos secundarios */
+    -fx-light-gray: #ECF0F1;              /* Gris claro para fondos y áreas de trabajo */
+    -fx-very-light-gray: #F5F7FA;         /* Gris muy claro para fondos alternativos */
+    -fx-warning-color: #F39C12;           /* Naranja para advertencias */
+    -fx-error-color: #E74C3C;             /* Rojo para errores */
+    -fx-success-color: #27AE60;           /* Verde oscuro para éxito */
+    -fx-text-color: #2C3E50;              /* Color principal para texto */
+    -fx-light-text-color: #ECF0F1;        /* Color para texto sobre fondos oscuros */
+}
+
+/* Estilos generales */
+.root {
+    -fx-font-family: "Roboto", "Segoe UI", sans-serif;
+    -fx-background-color: -fx-light-gray;
+    -fx-font-size: 13px;
+}
+
+/* Barra de menú y menús */
+.menu-bar {
+    -fx-background-color: -fx-primary-color;
+}
+
+.menu-bar .label {
+    -fx-text-fill: white;
+}
+
+.menu-bar .menu:hover {
+    -fx-background-color: derive(-fx-primary-color, 20%);
+}
+
+.menu-item {
+    -fx-background-color: white;
+}
+
+.menu-item:hover {
+    -fx-background-color: -fx-light-gray;
+}
+
+.menu-item .label {
+    -fx-text-fill: -fx-text-color;
+}
+
+/* Barra de herramientas */
+.tool-bar {
+    -fx-background-color: -fx-very-light-gray;
+    -fx-border-color: derive(-fx-light-gray, -10%);
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 8 10;
+    -fx-spacing: 8;
+}
+
+/* Estilos para el panel maestro */
+.master-panel {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 8, 0, 0, 0);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 15;
+    -fx-min-width: 350px;
+    -fx-pref-width: 350px;
+}
+
+/* Estilos para el panel de detalle */
+.detail-panel {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 8, 0, 0, 0);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 15;
+}
+
+/* Estilos para botones de acción */
+.action-button {
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 15;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+.action-button:hover {
+    -fx-background-color: derive(-fx-primary-color, 20%);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0);
+}
+
+.action-button:pressed {
+    -fx-background-color: derive(-fx-primary-color, -10%);
+}
+
+/* Estilos para botones de herramientas */
+.tool-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-dark-gray;
+    -fx-padding: 6 12;
+    -fx-cursor: hand;
+    -fx-border-radius: 4;
+}
+
+.tool-button:hover {
+    -fx-background-color: derive(-fx-light-gray, -5%);
+}
+
+.tool-button:pressed {
+    -fx-background-color: derive(-fx-light-gray, -10%);
+}
+
+/* Estilos para botones primarios */
+.primary-button {
+    -fx-background-color: -fx-secondary-color;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+.primary-button:hover {
+    -fx-background-color: derive(-fx-secondary-color, 20%);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0);
+}
+
+.primary-button:pressed {
+    -fx-background-color: derive(-fx-secondary-color, -10%);
+}
+
+/* Estilos para botones secundarios */
+.secondary-button {
+    -fx-background-color: -fx-light-gray;
+    -fx-text-fill: -fx-text-color;
+    -fx-padding: 10 20;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover {
+    -fx-background-color: derive(-fx-light-gray, -10%);
+}
+
+.secondary-button:pressed {
+    -fx-background-color: derive(-fx-light-gray, -15%);
+}
+
+/* Estilos para botones de eliminación */
+.delete-button {
+    -fx-background-color: -fx-error-color;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 15;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+.delete-button:hover {
+    -fx-background-color: derive(-fx-error-color, 20%);
+}
+
+/* Estilos para títulos de sección */
+.section-title {
+    -fx-font-family: "Montserrat", "Segoe UI", sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-color;
+    -fx-padding: 0 0 10 0;
+}
+
+/* Estilos para subtítulos */
+.sub-title {
+    -fx-font-family: "Montserrat", "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-gray;
+    -fx-padding: 5 0;
+}
+
+/* Estilos para la tabla */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: derive(-fx-light-gray, -10%);
+    -fx-border-radius: 4;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -fx-primary-color;
+    -fx-background-radius: 4 4 0 0;
+    -fx-padding: 5 0;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+    -fx-border-width: 0 0 0 0;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: -fx-very-light-gray;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: derive(-fx-secondary-color, 40%);
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: -fx-text-color;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: derive(-fx-light-gray, 5%);
+}
+
+.table-row-cell:selected:hover {
+    -fx-background-color: derive(-fx-secondary-color, 30%);
+}
+
+/* Estilos para campos de texto */
+.text-field, .date-picker, .combo-box {
+    -fx-background-color: -fx-very-light-gray;
+    -fx-background-radius: 4;
+    -fx-border-color: derive(-fx-light-gray, -10%);
+    -fx-border-radius: 4;
+    -fx-padding: 8;
+}
+
+.text-field:focused, .date-picker:focused, .combo-box:focused {
+    -fx-border-color: -fx-secondary-color;
+    -fx-background-color: white;
+}
+
+/* Estilos para pestañas */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: -fx-very-light-gray;
+    -fx-border-color: derive(-fx-light-gray, -10%);
+    -fx-border-width: 0 0 1 0;
+}
+
+.tab-pane .tab {
+    -fx-background-color: transparent;
+    -fx-padding: 10 15;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: white;
+    -fx-background-radius: 4 4 0 0;
+    -fx-border-color: derive(-fx-light-gray, -10%);
+    -fx-border-width: 1 1 0 1;
+    -fx-border-radius: 4 4 0 0;
+}
+
+.tab .tab-label {
+    -fx-text-fill: -fx-text-color;
+    -fx-font-weight: normal;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: -fx-primary-color;
+    -fx-font-weight: bold;
+}
+
+/* Estilos para separadores */
+.separator {
+    -fx-background-color: derive(-fx-light-gray, -10%);
+}
+
+.separator:vertical .line {
+    -fx-border-color: derive(-fx-light-gray, -10%);
+    -fx-border-width: 0 1 0 0;
+}
+
+.separator:horizontal .line {
+    -fx-border-color: derive(-fx-light-gray, -10%);
+    -fx-border-width: 1 0 0 0;
+}
+
+/* Estilos para etiquetas */
+.label {
+    -fx-text-fill: -fx-text-color;
+}
+
+/* Estilos para grupos de campos */
+.field-group {
+    -fx-spacing: 5;
+    -fx-padding: 10 0;
+}
+
+/* Estilos para tarjetas de información */
+.info-card {
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);
+    -fx-padding: 15;
+}
+
+/* Estilos para tarjetas de estadísticas */
+.stat-card {
+    -fx-background-color: -fx-primary-color;
+    -fx-background-radius: 5;
+    -fx-padding: 15;
+}
+
+.stat-card .label {
+    -fx-text-fill: white;
+}
+
+.stat-card .stat-value {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.stat-card .stat-title {
+    -fx-font-size: 14px;
+    -fx-opacity: 0.8;
+}
+
+/* Estilos para barras de búsqueda */
+.search-box {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: derive(-fx-light-gray, -10%);
+    -fx-padding: 8 15;
+}
+
+.search-box:focused {
+    -fx-border-color: -fx-secondary-color;
+}
+
+/* Estilos para paneles de filtro */
+.filter-panel {
+    -fx-background-color: -fx-very-light-gray;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+/* Estilos para mensajes de estado */
+.status-message {
+    -fx-padding: 10;
+    -fx-background-radius: 5;
+    -fx-font-weight: bold;
+}
+
+.status-message.info {
+    -fx-background-color: derive(-fx-primary-color, 70%);
+    -fx-text-fill: -fx-primary-color;
+}
+
+.status-message.success {
+    -fx-background-color: derive(-fx-success-color, 70%);
+    -fx-text-fill: -fx-success-color;
+}
+
+.status-message.warning {
+    -fx-background-color: derive(-fx-warning-color, 70%);
+    -fx-text-fill: -fx-warning-color;
+}
+
+.status-message.error {
+    -fx-background-color: derive(-fx-error-color, 70%);
+    -fx-text-fill: -fx-error-color;
+}
+
+/* Estilos para tooltips */
+.tooltip {
+    -fx-background-color: -fx-dark-gray;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 8 12;
+    -fx-background-radius: 4;
+}
+
+/* ESTILOS PARA LA VENTANA 'ACERCA DE' */
+.developer-card {
+    -fx-background-color: -fx-very-light-gray;
+    -fx-background-radius: 5;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);
+}
+
+.developer-name {
+    -fx-font-family: "Montserrat", "Segoe UI", sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-color;
+}
+
+.developer-role {
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-dark-gray;
+    -fx-opacity: 0.8;
+}
+
+/* Estilos para las imágenes de perfil */
+.developer-card ImageView {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 8, 0, 0, 0);
+    -fx-background-radius: 60;
+    -fx-border-radius: 60;
+}
+
+.text-field {
+    -fx-background-radius: 5px;
+    -fx-border-color: derive(-fx-primary-color, 70%) ;
+}
