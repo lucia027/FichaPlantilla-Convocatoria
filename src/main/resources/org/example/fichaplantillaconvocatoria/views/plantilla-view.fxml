@@ -30,7 +30,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="732.0" prefWidth="1171.0" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.fichanewteam.controllers.HelloController">
+<BorderPane prefHeight="732.0" prefWidth="1171.0" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.fichaplantillaconvocatoria.controllers.HelloController">
 
     <!-- Parte superior: Menú y barra de herramientas -->
     <top>

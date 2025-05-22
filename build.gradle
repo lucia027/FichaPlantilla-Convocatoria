@@ -33,10 +33,13 @@ kotlin {
     jvmToolchain(21)
 }
 
+
 javafx {
     version = '21'
     modules = ['javafx.controls', 'javafx.fxml']
 }
+
+
 
 dependencies {
 

@@ -19,8 +19,8 @@ class LoginController {
     private lateinit var usuarioField: TextField
 
     private val usuarios = mutableMapOf<String, String>(
-        "Pablo" to BCrypt.hashpw("admin", BCrypt.gensalt()),
-        "Lucia" to BCrypt.hashpw("user", BCrypt.gensalt())
+        "Lucia" to BCrypt.hashpw("admin", BCrypt.gensalt()),
+        "User" to BCrypt.hashpw("user", BCrypt.gensalt())
     )
 
     fun initialize() {

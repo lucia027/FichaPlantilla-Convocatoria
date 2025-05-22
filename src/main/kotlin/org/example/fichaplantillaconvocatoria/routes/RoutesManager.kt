@@ -16,7 +16,6 @@ import org.lighthousegames.logging.logging
 import java.io.InputStream
 import java.net.URL
 import java.util.Locale
-import javax.security.auth.callback.Callback
 
 private val logger = logging()
 
@@ -36,10 +35,10 @@ object RoutesManager {
      * @param fxml --> para saber cuál es el formato del archivo
      */
     enum class View(val fxml : String) {
-        PLANTILLA("resources/views/plantilla-view.fxml"),
-        HELP("resources/views/acerca-de-view.fxml"),
-        SPLASH("resources/views/splash.fxml"),
-        LOGIN("resources/views/login-view.fxml"),
+        PLANTILLA("views/plantilla-view.fxml"),
+        HELP("views/acerca-de-view.fxml"),
+        SPLASH("views/splash.fxml"),
+        LOGIN("views/login-view.fxml"),
     }
 
     /**
@@ -52,6 +51,7 @@ object RoutesManager {
 
     /**
      * Funcion para cargar recursos por flujo de entrada
+     * @param resource --> ruta del archivo a cargar
      * @param resource --> ruta del archivo a cargar
      * @return --> devuelve la imagen o una excepción
      */
