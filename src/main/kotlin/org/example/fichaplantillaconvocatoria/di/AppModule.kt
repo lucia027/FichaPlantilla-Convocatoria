@@ -27,7 +27,9 @@ val appModule = module {
         config = get()
     ) }
 
-    single<Config> { Config() }
+    single<Config> {
+        Config()
+    }
 
     single<PlantillaRepository> { PlantillaRepositoryImpl(
         get()

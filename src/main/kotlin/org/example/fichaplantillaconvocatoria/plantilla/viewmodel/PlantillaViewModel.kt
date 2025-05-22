@@ -131,7 +131,7 @@ class PlantillaViewModel(
 
         servicio.loadImage(plantilla.rutaImagen).onSuccess {
             imagen = Image(it.toString())
-            fileImage = it as File
+            fileImage = it
         }
 
         when(plantilla.rol){
