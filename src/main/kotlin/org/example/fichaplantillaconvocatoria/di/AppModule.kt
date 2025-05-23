@@ -15,21 +15,21 @@ import org.jdbi.v3.core.Jdbi
 import org.koin.dsl.module
 
 val appModule = module {
-    single<Jdbi> { provideDatabaseManager(
+    single<Config> {
+        Config()
+    }
+
+    single<Jdbi> {provideDatabaseManager(
+            get())
+    }
+
+    single<Cache<Long, Plantilla>> { providePersonalCache(
         config = get()
     ) }
 
     single<PlantillaDao> { providePlantillaDao(
         jdbi = get()
     ) }
-
-    single<Cache<Long, Plantilla>> { providePersonalCache(
-        config = get()
-    ) }
-
-    single<Config> {
-        Config()
-    }
 
     single<PlantillaRepository> { PlantillaRepositoryImpl(
         get()
