@@ -10,10 +10,10 @@ import org.example.fichaplantillaconvocatoria.plantilla.error.PlantillaError
 import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
 import org.example.fichaplantillaconvocatoria.plantilla.models.Jugador
 import org.example.fichaplantillaconvocatoria.plantilla.models.Entrenador
-import org.lighthousegames.logging.logging
-import javafx.scene.image.Image
 import org.example.fichaplantillaconvocatoria.plantilla.mapper.toModel
 import org.example.fichaplantillaconvocatoria.routes.RoutesManager
+import org.lighthousegames.logging.logging
+import javafx.scene.image.Image
 import kotlin.String
 import java.io.File
 import kotlin.collections.map
@@ -202,17 +202,17 @@ class PlantillaViewModel(
         return Ok(Unit)
     }
 
-    fun updateImagePlantilaOperacion(fileImage: File, jugador: Jugador, entrenador: Entrenador){
+    fun updateImagePlantilaOperacio(fileImage: File, jugador: Jugador, entrenador: Entrenador){
         state.value = state.value.copy(
             plantilla = state.value.plantilla.map { plantilla ->
                 when (plantilla.rol) {
                     "Jugador" -> jugador.copy(
-                        rutaImagen = fileImage.toString(),
+                        rutaImagen = Image(fileImage.toURI()).toString(),
                         fileImage = fileImage,
                         oldFileImage = state.value.jugador.fileImage
                     )
                     else -> entrenador.copy(
-                        rutaImagen = fileImage.toString(),
+                        rutaImagen = Image(fileImage.toURI()).toString(),
                         fileImage = fileImage,
                         oldFileImage = state.value.entrenador.fileImage
                     )
