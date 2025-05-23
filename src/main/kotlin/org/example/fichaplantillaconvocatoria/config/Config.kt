@@ -1,10 +1,8 @@
 package org.example.fichaplantillaconvocatoria.config
 
-import org.lighthousegames.logging.logging
 import java.io.File
 import java.io.InputStream
 import java.util.Properties
-import java.util.*
 
 private const val CONFIG_FILE_NAME = "config.properties"
 
