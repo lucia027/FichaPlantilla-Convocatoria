@@ -20,13 +20,13 @@ import java.io.File
 private val logger = logging()
 
 class PlantillaViewModel(
-    private val servicio: PlantillaService,
+    private val servicio: PlantillaService
 ) {
     val state: SimpleObjectProperty<ExpedienteState> = SimpleObjectProperty(ExpedienteState())
 
     init {
         println("PlantillaViewModel init called")
-        loadPlantillaJson(File("data/personal.json"))
+        loadAllPlantilla()
         loadTypes()
     }
 
@@ -34,16 +34,9 @@ class PlantillaViewModel(
         state.value = state.value.copy(typesPlantilla = TipoFiltro.entries.map { it.value })
     }
 
-    private fun loadPlantilla() {
-        servicio.findAll().onSuccess { plantillaCompleta ->
-            val jugadores = plantillaCompleta.filter { it.rol == "Jugador" }.map { it.toJugador() }
-            val entrenadores = plantillaCompleta.filter { it.rol == "Entrenador" }.map { it.toEntrenador() }
-
-            state.value = state.value.copy(
-                plantilla = plantillaCompleta,
-                jugador = jugadores,
-                entrenador = entrenadores
-            )
+    private fun loadAllPlantilla() {
+        servicio.findAll().onSuccess {
+            state.value = state.value.copy(plantilla = it)
             updateActualState()
         }
     }
@@ -86,7 +79,6 @@ class PlantillaViewModel(
         )
     }
 
-    /* //EN PRINCIPIO YA LA TENGO YO HECHA EN EL CONTROLLER
     fun plantillaFilteredList(tipo: String, nombre: String): List<Plantilla>{
         return state.value.plantilla
             .filter { plantilla ->
@@ -100,9 +92,7 @@ class PlantillaViewModel(
             }
     }
 
-     */
-
-    fun savePlantillaToFile(file:File): Result<Long, PlantillaError> {
+    fun savePlantillaToJson(file: File): Result<Long, PlantillaError>{
         return servicio.storageDataJson(file, state.value.plantilla)
     }
 
@@ -117,13 +107,12 @@ class PlantillaViewModel(
                             listaPlantilla.map { a -> a.copy(id = Plantilla.NEW_ID, rutaImagen = TipoImagen.SIN_IMAGEN.value) }
                     )
                 }.onSuccess {
-                    loadPlantilla()
+                    loadAllPlantilla()
                     Ok(listaPlantilla)
                 }
             }
         }
     }
-
 
     fun updatePlantillaSelecionado(plantilla: Plantilla, jugador: Jugador, entrenador: Entrenador) {
         var imagen = Image(RoutesManager.getResourceAsStream("images/default_profile.png"))
@@ -171,6 +160,13 @@ class PlantillaViewModel(
         }
     }
 
+//    fun crearJugador(): Result<Jugador, PlantillaError> {
+//        val newJugadorTemp = state.value.copy(jugador = state.value.jugador)
+//        val newJugador = newJugadorTemp.toModel().copy(id = Plantilla.NEW_ID)
+//    }
+//   fun crearEntrenador(): Result<Entrenador, PlantillaError> {}
+//   fun editarPlantilla(): Result<Plantilla, PlantillaError> {}
+
     fun eliminarJugador(): Result<Unit, PlantillaError> {
         val jugador = (state.value.jugador.find { it.id.toLong() == it.id.toLong() } ) as JugadorState
         val myId = jugador.id.toLong()
@@ -205,13 +201,15 @@ class PlantillaViewModel(
         return Ok(Unit)
     }
 
-//    fun crearJugador(): Result<Jugador, PlantillaError> {
-//        val newJugadorTemp = state.value.copy(jugador = state.value.jugador)
-//        val newJugador = newJugadorTemp.toModel().copy(id = Plantilla.NEW_ID)
-//    }
-
-//   fun crearEntrenador(): Result<Entrenador, PlantillaError> {}
-//    fun editarPlantilla(): Result<Plantilla, PlantillaError> {}
+    fun updateImagePlantilaOperacion(fileImage: File){
+        state.value = state.value.copy(
+            plantilla = state.value.plantilla.copy(
+                imagen = Image(fileImage.toURI().toString()),
+                fileImage = fileImage,
+                oldFileImage = state.value.plantilla.fileImage
+            )
+        )
+    }
 
     fun exportToZip(fileToZip: File): Result<Unit, PlantillaError> {
         servicio.findAll().andThen {
@@ -227,7 +225,7 @@ class PlantillaViewModel(
             servicio.deleteAll().andThen {
                 servicio.saveAll(lista.map{ a -> a.copy(id = Plantilla.NEW_ID) })
             }.onFailure {
-                loadPlantilla()
+                loadAllPlantilla()
             }
         }
     }
@@ -246,7 +244,7 @@ class PlantillaViewModel(
         }
     }
 
-    fun updateDataPlantilla(
+    fun updateDataPlantillaOperacion(
         jugador: Jugador,
         entrenador: Entrenador
     ) {
