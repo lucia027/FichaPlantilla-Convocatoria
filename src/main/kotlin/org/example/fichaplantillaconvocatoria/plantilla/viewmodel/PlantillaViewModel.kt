@@ -16,6 +16,7 @@ import org.example.fichaplantillaconvocatoria.plantilla.mapper.toModel
 import org.example.fichaplantillaconvocatoria.routes.RoutesManager
 import kotlin.String
 import java.io.File
+import kotlin.collections.map
 
 private val logger = logging()
 
@@ -201,13 +202,22 @@ class PlantillaViewModel(
         return Ok(Unit)
     }
 
-    fun updateImagePlantilaOperacion(fileImage: File){
+    fun updateImagePlantilaOperacion(fileImage: File, jugador: Jugador, entrenador: Entrenador){
         state.value = state.value.copy(
-            plantilla = state.value.plantilla.copy(
-                imagen = Image(fileImage.toURI().toString()),
-                fileImage = fileImage,
-                oldFileImage = state.value.plantilla.fileImage
-            )
+            plantilla = state.value.plantilla.map { plantilla ->
+                when (plantilla.rol) {
+                    "Jugador" -> jugador.copy(
+                        rutaImagen = fileImage.toString(),
+                        fileImage = fileImage,
+                        oldFileImage = state.value.jugador.fileImage
+                    )
+                    else -> entrenador.copy(
+                        rutaImagen = fileImage.toString(),
+                        fileImage = fileImage,
+                        oldFileImage = state.value.entrenador.fileImage
+                    )
+                }
+            }
         )
     }
 
