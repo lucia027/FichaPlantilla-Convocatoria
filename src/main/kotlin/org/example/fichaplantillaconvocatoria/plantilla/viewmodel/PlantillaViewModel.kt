@@ -202,6 +202,7 @@ class PlantillaViewModel(
         return Ok(Unit)
     }
 
+    /*
     fun updateImagePlantilaOperacio(fileImage: File, jugador: JugadorState, entrenador: EntrenadorState){
         state.value = state.value.copy(
             plantilla = state.value.plantilla.map { plantilla ->
@@ -220,6 +221,7 @@ class PlantillaViewModel(
             }
         )
     }
+    */
 
     fun exportToZip(fileToZip: File): Result<Unit, PlantillaError> {
         servicio.findAll().andThen {
