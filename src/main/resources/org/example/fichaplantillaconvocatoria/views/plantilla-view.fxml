@@ -12,7 +12,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -103,7 +102,6 @@
                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                         </columnResizePolicy>
                     </TableView>
-                    <Slider fx:id="sliderTable" />
 
                     <HBox alignment="CENTER" prefHeight="59.0" prefWidth="396.0" spacing="10">
                         <Button fx:id="añadirButton" styleClass="action-button" text="Añadir">
