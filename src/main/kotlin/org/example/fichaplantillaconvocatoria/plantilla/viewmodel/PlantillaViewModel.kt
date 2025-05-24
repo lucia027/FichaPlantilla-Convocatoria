@@ -202,20 +202,20 @@ class PlantillaViewModel(
         return Ok(Unit)
     }
 
-    fun updateImagePlantilaOperacio(fileImage: File, jugador: Jugador, entrenador: Entrenador){
+    fun updateImagePlantilaOperacio(fileImage: File, jugador: JugadorState, entrenador: EntrenadorState){
         state.value = state.value.copy(
             plantilla = state.value.plantilla.map { plantilla ->
                 when (plantilla.rol) {
                     "Jugador" -> jugador.copy(
-                        rutaImagen = Image(fileImage.toURI()).toString(),
+                        rutaImagen = Image(fileImage.toURI()),
                         fileImage = fileImage,
                         oldFileImage = state.value.jugador.fileImage
-                    )
+                    ).toModel()
                     else -> entrenador.copy(
-                        rutaImagen = Image(fileImage.toURI()).toString(),
+                        rutaImagen = Image(fileImage.toURI()),
                         fileImage = fileImage,
                         oldFileImage = state.value.entrenador.fileImage
-                    )
+                    ).toModel()
                 }
             }
         )
