@@ -21,6 +21,7 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -75,57 +76,111 @@
             <VBox prefHeight="640.0" prefWidth="376.0">
                 <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="100.0" prefHeight="673.0" prefWidth="426.0" spacing="20.0" styleClass="master-panel">
 
-                    <Label styleClass="section-title" text="Miembros del Equipo" />
-
-                    <HBox alignment="CENTER_LEFT" spacing="10" styleClass="filter-panel">
-                        <ComboBox fx:id="filterComboBox" prefWidth="150" promptText="Filtrar por tipo">
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor></ComboBox>
-                        <TextField promptText="Buscar..." styleClass="search-box" HBox.hgrow="ALWAYS">
-                            <cursor>
-                                <Cursor fx:constant="TEXT" />
-                            </cursor></TextField>
-                    </HBox>
-
-                    <TableView fx:id="plantillaTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="383.0" VBox.vgrow="ALWAYS">
-                        <columns>
-                            <TableColumn fx:id="idColumn" prefWidth="39.0" text="  ID" />
-                            <TableColumn fx:id="nombreColumn" prefWidth="104.0" text="Nombre" />
-                            <TableColumn fx:id="apellidosColumn" prefWidth="150" text="Apellidos" />
-                            <TableColumn fx:id="rolColumn" prefWidth="100" text="Rol" />
-                        </columns>
-                        <placeholder>
-                            <Label text="No hay miembros para mostrar" />
-                        </placeholder>
-                        <columnResizePolicy>
-                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                        </columnResizePolicy>
-                    </TableView>
-
-                    <HBox alignment="CENTER" prefHeight="59.0" prefWidth="396.0" spacing="10">
-                        <Button fx:id="añadirButton" styleClass="action-button" text="Añadir">
-                            <graphic>
-                                <ImageView fitHeight="21.0" fitWidth="21.0">
-                                    <Image url="@../icons/add_white_icon.png" />
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button fx:id="editarButton" styleClass="action-button" text="Editar">
-                            <graphic>
-                                <ImageView fitHeight="21.0" fitWidth="21.0">
-                                    <Image url="@../icons/edit_white_icon.png" />
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button fx:id="eliminarButton" styleClass="delete-button" text="Eliminar">
-                            <graphic>
-                                <ImageView fitHeight="21.0" fitWidth="21.0">
-                                    <Image url="@../icons/delete_white_icon.png" />
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                    </HBox>
+                    <Label prefHeight="30.0" prefWidth="181.0" styleClass="section-title" text="Miembros del Equipo" />
+               <TabPane prefHeight="688.0" prefWidth="396.0" tabClosingPolicy="UNAVAILABLE">
+                 <tabs>
+                   <Tab text="Lista plantilla">
+                     <content>
+                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                              <children>
+                  
+                                                  <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="397.0" spacing="10" styleClass="filter-panel">
+                                          <ComboBox fx:id="filterComboBox" prefWidth="150" promptText="Filtrar por tipo">
+                                              <cursor>
+                                                  <Cursor fx:constant="HAND" />
+                                              </cursor>
+                                    </ComboBox>
+                                          <TextField promptText="Buscar..." styleClass="search-box" HBox.hgrow="ALWAYS">
+                                              <cursor>
+                                                  <Cursor fx:constant="TEXT" />
+                                              </cursor>
+                                    </TextField>
+                                      </HBox>
+                  
+                                                  <TableView fx:id="plantillaTable" layoutY="61.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="395.0">
+                                          <columns>
+                                              <TableColumn fx:id="idColumn" prefWidth="39.0" text="  ID" />
+                                              <TableColumn fx:id="nombreColumn" prefWidth="104.0" text="Nombre" />
+                                              <TableColumn fx:id="apellidosColumn" prefWidth="150" text="Apellidos" />
+                                              <TableColumn fx:id="rolColumn" prefWidth="100" text="Rol" />
+                                          </columns>
+                                          <placeholder>
+                                              <Label text="No hay miembros para mostrar" />
+                                          </placeholder>
+                                          <columnResizePolicy>
+                                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                          </columnResizePolicy>
+                                      </TableView>
+                  
+                                                        <HBox alignment="CENTER" layoutY="455.0" prefHeight="67.0" prefWidth="396.0" spacing="10">
+                                          <Button fx:id="añadirButton" styleClass="action-button" text="Añadir">
+                                              <graphic>
+                                                  <ImageView fitHeight="21.0" fitWidth="21.0">
+                                                      <Image url="@../icons/add_white_icon.png" />
+                                                  </ImageView>
+                                              </graphic>
+                                          </Button>
+                                          <Button fx:id="editarButton" styleClass="action-button" text="Editar">
+                                              <graphic>
+                                                  <ImageView fitHeight="21.0" fitWidth="21.0">
+                                                      <Image url="@../icons/edit_white_icon.png" />
+                                                  </ImageView>
+                                              </graphic>
+                                          </Button>
+                                          <Button fx:id="eliminarButton" styleClass="delete-button" text="Eliminar">
+                                              <graphic>
+                                                  <ImageView fitHeight="21.0" fitWidth="21.0">
+                                                      <Image url="@../icons/delete_white_icon.png" />
+                                                  </ImageView>
+                                              </graphic>
+                                          </Button>
+                                      </HBox>
+                              </children>
+                           </AnchorPane>
+                     </content>
+                   </Tab>
+                   <Tab text="Convocatoria">
+                     <content>
+                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                              <children>
+                                 <TableView fx:id="titularesTable" layoutY="33.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="396.0">
+                                    <columns>
+                                       <TableColumn fx:id="idColumn1" prefWidth="39.0" text="  ID" />
+                                       <TableColumn fx:id="nombreColumn1" prefWidth="104.0" text="Nombre" />
+                                       <TableColumn fx:id="apellidosColumn1" prefWidth="150" text="Apellidos" />
+                                       <TableColumn fx:id="rolColumn1" prefWidth="100" text="Rol" />
+                                    </columns>
+                                    <placeholder>
+                                       <Label text="No hay miembros para mostrar" />
+                                    </placeholder>
+                                    <columnResizePolicy>
+                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                    </columnResizePolicy>
+                                 </TableView>
+                                 <TextField fx:id="entrenadorField" layoutX="91.0" layoutY="282.0" prefHeight="37.0" prefWidth="299.0" />
+                                 <TableView fx:id="reservasTable" layoutY="357.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="396.0">
+                                    <columns>
+                                       <TableColumn fx:id="idColumn11" prefWidth="39.0" text="  ID" />
+                                       <TableColumn fx:id="nombreColumn11" prefWidth="104.0" text="Nombre" />
+                                       <TableColumn fx:id="apellidosColumn11" prefWidth="150" text="Apellidos" />
+                                       <TableColumn fx:id="rolColumn11" prefWidth="100" text="Rol" />
+                                    </columns>
+                                    <placeholder>
+                                       <Label text="No hay miembros para mostrar" />
+                                    </placeholder>
+                                    <columnResizePolicy>
+                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                    </columnResizePolicy>
+                                 </TableView>
+                                 <Label fx:id="rolPosicionLabel1" layoutX="6.0" layoutY="3.0" styleClass="sub-title" text="Titulares" />
+                                 <Label fx:id="rolPosicionLabel11" layoutX="6.0" layoutY="327.0" styleClass="sub-title" text="Reservas" />
+                                 <Label fx:id="rolPosicionLabel12" layoutX="6.0" layoutY="286.0" styleClass="sub-title" text="Entrenador:" />
+                              </children>
+                           </AnchorPane>
+                     </content>
+                   </Tab>
+                 </tabs>
+               </TabPane>
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
