@@ -1,6 +1,7 @@
 package org.example.fichaplantillaconvocatoria.controllers
 
 import javafx.beans.property.SimpleStringProperty
+import javafx.beans.value.ObservableValue
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
@@ -187,10 +188,17 @@ class HelloController : KoinComponent {
     private lateinit var salarioMaximoField: TextField
 
     @FXML
-    private lateinit var golePromedioField: TextField
+    private lateinit var golesPromedioField: TextField
+
+    @FXML
+    private lateinit var pesoMinimoField: TextField
+
+    @FXML
+    private lateinit var minutosPromedioField: TextField
 
     @FXML
     private lateinit var filterComboBox: ComboBox<String>
+
 
     @FXML
     lateinit var sliderTable: Slider
@@ -199,9 +207,11 @@ class HelloController : KoinComponent {
 
     @FXML
     fun initialize() {
+        initDefaultValues()
+
+        initBindings()
 
         initEvents()
-        initDefaultValues()
 
         //Las añado aqui por qué si no hay que hacer click dos veces para que se inicialice
         onComboBoxAction()
@@ -220,6 +230,27 @@ class HelloController : KoinComponent {
     fun onHelpAction() {
         logger.debug { "onHelpAction" }
         RoutesManager.initHelpStage()
+    }
+
+    fun initBindings(){
+//        //Valores de las consultas
+//        //Jugadores
+//        pesoMinimoField.textProperty().bind(viewModel.state.map{ it.pesoMinimo } as ObservableValue<String>)
+//        salarioMaximoField.textProperty().bind(viewModel.state.map { it.salarioMaximo } as ObservableValue<String>)
+//        AlturaMinimaField.textProperty().bind(viewModel.state.map { it.alturaMinima } as ObservableValue<String>)
+//        PartidosTotalField.textProperty().bind(viewModel.state.map { it.totalPartidos } as ObservableValue<String>)
+//        NumJugadoresField.textProperty().bind(viewModel.state.map { it.jugadoresTotal } as ObservableValue<String> )
+//
+//        //Entrenadores
+//        salarioPromedioField.textProperty().bind(viewModel.state.map { it.salarioPromedio } as ObservableValue<String>)
+//        fechaAntiguaField.textProperty().bind(viewModel.state.map{ it.incorporacionAntigua } as ObservableValue<String>)
+//        fechaActualField.textProperty().bind(viewModel.state.map{ it.nacimientoActual } as ObservableValue<String>)
+//        entrenadoresAsistentesField.textProperty().bind(viewModel.state.map { it.entrenadoresAsistentes } as ObservableValue<String>)
+//
+//        //General
+//        golesPromedioField.textProperty().bind(viewModel.state.map { it.golesPromedio } as ObservableValue<String>)
+//        minutosPromedioField.textProperty().bind(viewModel.state.map { it.minutosPromedio } as ObservableValue<String>)
+
     }
 
     fun initDefaultValues() {
@@ -243,7 +274,6 @@ class HelloController : KoinComponent {
         menuHelp.accelerator = KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN)
 
         //Variables desactivadas al inicio de la app para imposibilitar el editarlas
-
         paisField.isDisable = true
         fechaIncorporacionField.isDisable = true
         fechaNacimientoField.isDisable = true
@@ -257,7 +287,7 @@ class HelloController : KoinComponent {
         pesoField.isDisable = true
         rolComboBox.isDisable = true
         posicionComboBox.isDisable = true
-        golePromedioField.isDisable = true
+        pesoMinimoField.isDisable = true
         salarioMaximoField.isDisable = true
         salarioPromedioField.isDisable = true
         AlturaMinimaField.isDisable = true
@@ -267,8 +297,6 @@ class HelloController : KoinComponent {
         fechaActualField.isDisable = true
         entrenadoresAsistentesField.isDisable = true
         entrenadoresEspañolesField.isDisable = true
-
-        golePromedioField.textProperty().bind(viewModel.state.map { it.golesPromedio.toString() })
 
         if (viewModel.state.value.jugador.isEmpty()) {
             println("No hay jugadores")

@@ -45,28 +45,31 @@ class PlantillaViewModel(
     private fun updateActualState() {
 
         // Consultas jugadores
-        val golesPromedioConsulta = state.value.jugador.map { it.goles }.average()
+        val pesoMinimoConsulta = state.value.jugador.mapNotNull { it.peso }.minOrNull() ?: 0.0
         val salarioMaximoConsulta = state.value.jugador.mapNotNull { it.salario }.maxOrNull() ?: 0.0
         val alturaMinimaConsulta = state.value.jugador.mapNotNull { it.altura }.minOrNull() ?: 0.0
         val totalPartidosConsulta = state.value.jugador.sumOf { it.partidosJugados }
-        val minutosPromedioConsulta = state.value.jugador.mapNotNull { it.minutosJugados }.average()
+        val jugadoresTotalConsulta = state.value.jugador.count()
 
         // Consultas entrenadores
         val salarioPromedioConsulta = state.value.entrenador.mapNotNull { it.salario }.average()
-
         val incorporacionAntiguaConsulta = state.value.entrenador.minByOrNull { it.fechaIncorporacion }?.fechaIncorporacion ?: ""
         val nacimientoActualConsulta = state.value.entrenador.maxByOrNull { it.fechaNacimiento }?.fechaNacimiento ?: ""
-
         val entrenadoresAsistentesConsulta = state.value.entrenador.count { it.especialidad == "ASISTENTE" }
         val entrenadoresEspañolesConsulta = state.value.entrenador.count { it.pais == "España" }
 
+        // Consultas general
+        val golesPromedioConsulta = state.value.jugador.map { it.goles }.average()
+        val minutosPromedioConsulta = state.value.jugador.mapNotNull { it.minutosJugados }.average()
+
+
         state.value = state.value.copy(
             // State de jugadores
-            golesPromedio = golesPromedioConsulta,
+            pesoMinimo = pesoMinimoConsulta,
             salarioMaximo = salarioMaximoConsulta,
             alturaMinima = alturaMinimaConsulta,
             totalPartidos = totalPartidosConsulta,
-            minutosPromedio = minutosPromedioConsulta,
+            jugadoresTotal = jugadoresTotalConsulta,
 
             // State de entrenadores
             salarioPromedio = salarioPromedioConsulta,
@@ -74,6 +77,10 @@ class PlantillaViewModel(
             nacimientoActual = nacimientoActualConsulta,
             entrenadoresAsistentes = entrenadoresAsistentesConsulta,
             entrenadoresEspanoles = entrenadoresEspañolesConsulta,
+
+            // State general
+            minutosPromedio = minutosPromedioConsulta,
+            golesPromedio = golesPromedioConsulta,
 
             // Aqui se guarda el state de los miembros de la plantilla
             miembro = PlantillaState()
@@ -308,11 +315,11 @@ class PlantillaViewModel(
         val entrenador: List<Entrenador> = emptyList(),
 
         //Variables de las consultas de jugadores
-        val golesPromedio: Double = 0.00,
+        val pesoMinimo: Double = 0.0,
         val salarioMaximo: Double = 0.00,
         val alturaMinima: Double = 0.00,
         val totalPartidos: Int = 0,
-        val minutosPromedio: Double = 0.00,
+        val jugadoresTotal: Int = 0,
 
         //Variables de las consultas de entrenador
         val salarioPromedio: Double = 0.00,
@@ -320,6 +327,10 @@ class PlantillaViewModel(
         val nacimientoActual: String = "",
         val entrenadoresAsistentes: Int = 0,
         val entrenadoresEspanoles: Int = 0,
+
+        //Variables de las consultas generales
+        val golesPromedio: Double = 0.00,
+        val minutosPromedio: Double = 0.00,
 
         //Miembro hace referencia al conjunto es decir el individual de plantilla
         val miembro: PlantillaState = PlantillaState(),
