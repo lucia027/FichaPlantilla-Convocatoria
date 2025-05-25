@@ -200,10 +200,6 @@ class HelloController : KoinComponent {
     private lateinit var filterComboBox: ComboBox<String>
 
 
-    @FXML
-    lateinit var sliderTable: Slider
-
-
 
     @FXML
     fun initialize() {
@@ -243,13 +239,19 @@ class HelloController : KoinComponent {
 //
 //        //Entrenadores
 //        salarioPromedioField.textProperty().bind(viewModel.state.map { it.salarioPromedio } as ObservableValue<String>)
-//        fechaAntiguaField.textProperty().bind(viewModel.state.map{ it.incorporacionAntigua } as ObservableValue<String>)
-//        fechaActualField.textProperty().bind(viewModel.state.map{ it.nacimientoActual } as ObservableValue<String>)
+//        fechaAntiguaField.textProperty().bind(viewModel.state.map{ it.incorporacionAntigua })
+//        fechaActualField.textProperty().bind(viewModel.state.map{ it.nacimientoActual })
 //        entrenadoresAsistentesField.textProperty().bind(viewModel.state.map { it.entrenadoresAsistentes } as ObservableValue<String>)
 //
 //        //General
 //        golesPromedioField.textProperty().bind(viewModel.state.map { it.golesPromedio } as ObservableValue<String>)
 //        minutosPromedioField.textProperty().bind(viewModel.state.map { it.minutosPromedio } as ObservableValue<String>)
+
+        viewModel.state.addListener{ _, _, newValue ->
+            if (plantillaTable.items != newValue.plantilla) {
+                plantillaTable.items = FXCollections.observableArrayList(newValue.plantilla)
+            }
+        }
 
     }
 
