@@ -37,9 +37,7 @@
         <VBox prefHeight="0.0" prefWidth="990.0">
             <MenuBar>
                 <Menu text="Archivo">
-                    <MenuItem fx:id="menuItem" text="Nuevo" />
                     <MenuItem fx:id="menuAbrir" text="Abrir" />
-                    <MenuItem fx:id="menuGuardar" text="Guardar" />
                     <SeparatorMenuItem />
                     <MenuItem fx:id="menuSalir" text="Salir" /> <!-- onAction="#handleExit" -->
                 </Menu>
@@ -48,8 +46,10 @@
                     <MenuItem fx:id="menuPegar" text="Pegar" />
                 </Menu>
                 <Menu text="Herramientas">
-                    <MenuItem fx:id="menuImportar" text="Importar" />
-                    <MenuItem fx:id="menuExportar" text="Exportar" />
+                    <MenuItem fx:id="menuImportarJson" text="Importar Json" />
+                    <MenuItem fx:id="menuExportarJson" text="Exportar Json" />
+               <MenuItem fx:id="menuImportarZip" text="Importar Zip" />
+               <MenuItem fx:id="menuExportarZip" text="Exportar Zip" />
                 </Menu>
                 <Menu text="Ayuda">
                     <MenuItem fx:id="menuHelp" onAction="#onHelpAction" text="Acerca De" />
@@ -60,7 +60,7 @@
             <ToolBar nodeOrientation="RIGHT_TO_LEFT">
                 <Separator orientation="VERTICAL" />
                 <!-- Botón para cambiar entre modos -->
-                <ToggleButton fx:id="modoEdicionToggle" selected="true" styleClass="tool-button" text="Cambiar a Modo Lectura" /> <!--  onAction="#cambiarModo"  -->
+                <ToggleButton fx:id="cambioUser" selected="true" styleClass="tool-button" text="Cambiar de usuario" /> <!--  onAction="#cambiarModo"  -->
                 <Separator orientation="VERTICAL" />
             </ToolBar>
 
@@ -90,7 +90,7 @@
                                                   <Cursor fx:constant="HAND" />
                                               </cursor>
                                     </ComboBox>
-                                          <TextField promptText="Buscar..." styleClass="search-box" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="searchText" promptText="Buscar..." styleClass="search-box" HBox.hgrow="ALWAYS">
                                               <cursor>
                                                   <Cursor fx:constant="TEXT" />
                                               </cursor>
@@ -338,8 +338,8 @@
                                                 <RowConstraints />
                                             </rowConstraints>
                                             <children>
-                                                <Label text="Posición:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                                <ComboBox fx:id="posicionComboBox1" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                                <Label text="Especialidad:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                                <ComboBox fx:id="especialidadComboBox" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                                             </children>
                                         </GridPane>
                                     </children>
