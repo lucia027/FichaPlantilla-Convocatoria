@@ -229,12 +229,12 @@
                     <!-- Tarjetas de estadísticas rápidas -->
                     <HBox spacing="10">
                         <VBox alignment="CENTER" prefHeight="80" prefWidth="100" styleClass="stat-card">
-                     <Label fx:id="golesPromedioField" prefHeight="40.0" prefWidth="48.0" styleClass="stat-title" />
+                     <TextField fx:id="golesPromedioField" />
                             <Label fx:id="statValue1" styleClass="stat-value" />
                             <Label fx:id="statTitle1" styleClass="stat-title" text="Goles" />
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="80" prefWidth="100" styleClass="stat-card">
-                     <Label fx:id="minutosPromedioField" prefHeight="48.0" prefWidth="52.0" styleClass="stat-title" />
+                     <TextField fx:id="minutosPromedioField" prefHeight="51.0" prefWidth="70.0" />
                             <Label fx:id="statValue2" styleClass="stat-value" />
                             <Label fx:id="statTitle2" styleClass="stat-title" text="Minutos" />
                         </VBox>
