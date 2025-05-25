@@ -11,7 +11,6 @@ import javafx.scene.layout.Pane
 import javafx.stage.Modality
 import javafx.stage.Stage
 import javafx.stage.WindowEvent
-import org.koin.java.KoinJavaComponent.getKoin
 import org.lighthousegames.logging.logging
 import java.io.InputStream
 import java.net.URL
