@@ -5,7 +5,6 @@ import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
 import org.example.fichaplantillaconvocatoria.plantilla.models.Jugador
 import org.example.fichaplantillaconvocatoria.plantilla.dto.PlantillaDto
 import org.example.fichaplantillaconvocatoria.plantilla.dto.JugadorDto
-import org.example.fichaplantillaconvocatoria.plantilla.viewmodel.PlantillaViewModel.JugadorState
 
 /**
  * Función que convierte el modelo a dto
@@ -128,25 +127,25 @@ fun JugadorDto.toEntity(): JugadorEntity {
     )
 }
 
-/**
- * Función que convierte un state a modelo
- */
-fun JugadorState.toModel(): Jugador {
-    return Jugador(
-        id = this.id,
-        nombre = this.nombre,
-        apellidos = this.apellidos,
-        fechaNacimiento = this.fechaNacimiento,
-        fechaIncorporacion = this.fechaNacimiento,
-        salario = this.salario,
-        pais = this.pais,
-        posicion = Jugador.Posicion.valueOf(this.posicion.toString()).toString(),
-        dorsal = this.dorsal,
-        altura = this.altura,
-        peso = this.peso,
-        goles = this.goles,
-        partidosJugados = this.partidosJugados,
-        rol = this.rol,
-        minutosJugados = this.minutosJugados
-    )
-}
+///**
+// * Función que convierte un state a modelo
+// */
+//fun JugadorState.toModel(): Jugador {
+//    return Jugador(
+//        id = this.id,
+//        nombre = this.nombre,
+//        apellidos = this.apellidos,
+//        fechaNacimiento = this.fechaNacimiento,
+//        fechaIncorporacion = this.fechaNacimiento,
+//        salario = this.salario,
+//        pais = this.pais,
+//        posicion = Jugador.Posicion.valueOf(this.posicion.toString()).toString(),
+//        dorsal = this.dorsal,
+//        altura = this.altura,
+//        peso = this.peso,
+//        goles = this.goles,
+//        partidosJugados = this.partidosJugados,
+//        rol = this.rol,
+//        minutosJugados = this.minutosJugados
+//    )
+//}
