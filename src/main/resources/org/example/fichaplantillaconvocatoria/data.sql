@@ -1,16 +1,25 @@
-DELETE FROM Pplantilla;
+DELETE FROM plantilla;
+ALTER TABLE plantilla ALTER COLUMN id RESTART WITH 1;
 
-ALTER TABLE plantilla
-    ALTER COLUMN id RESTART WITH 1;
-
-INSERT INTO plantilla (nombre, apellidos, fechaNacimiento, fechaIncorporacion, salario, pais, rol, posicion, dorsal, altura, peso, goles, partidosJugados, especialidad, rutaImagen, minutosJugados) VALUES
-         ('Juan', 'Pérez', '1990-05-10', '2022-01-15', 35000, 'España', 'Delantero', 'Extremo', 7, 1.80, 75, 15, 30, 'Regateador', 'images/juan_perez.png', 2100),
-         ('María', 'Gómez', '1995-09-22', '2023-07-01', 32000, 'Argentina', 'Defensa', 'Central', 4, 1.75, 65, 2, 25, 'Marcadora', 'images/maria_gomez.png', 1800),
-         ('Luis', 'Fernández', '1992-11-30', '2021-08-20', 40000, 'Uruguay', 'Portero', NULL, 1, 1.88, 82, 0, 40, 'Atajador', NULL, 3600),
-         ('Ana', 'Ríos', '1998-03-12', '2023-02-10', 30000, 'México', 'Centrocampista', 'Ofensivo', 8, 1.68, 60, 5, 28, 'Pasadora', 'images/ana_rios.png', 1900),
-         ('Pedro', 'Sosa', '1988-07-19', '2020-09-05', 42000, 'Chile', 'Defensa', 'Lateral', 2, 1.82, 78, 1, 45, 'Rápido', NULL, 4100),
-         ('Lucía', 'Martínez', '1996-11-05', '2022-12-12', 31000, 'Colombia', 'Delantero', 'Centro', 9, 1.73, 62, 18, 33, 'Rematadora', 'images/lucia_martinez.png', 2030),
-         ('Mateo', 'Ramírez', '1994-02-21', '2023-03-03', 39000, 'Ecuador', 'Centrocampista', 'Defensivo', 6, 1.77, 68, 3, 29, 'Recuperador', NULL, 1780),
-         ('Sofía', 'López', '1997-08-18', '2024-01-20', 32500, 'Perú', 'Delantero', 'Extremo', 11, 1.65, 59, 12, 21, 'Velocista', 'images/sofia_lopez.png', 1000),
-         ('Carlos', 'Navarro', '1991-12-01', '2021-11-13', 41000, 'Paraguay', 'Defensa', 'Central', 5, 1.83, 80, 0, 38, 'Fuerte', NULL, 3400),
-         ('Valentina', 'Ruiz', '2000-04-27', '2024-05-01', 29500, 'Venezuela', 'Portero', NULL, 12, 1.74, 67, 0, 12, 'Reflejos', 'images/valentina_ruiz.png', 800);
+INSERT INTO plantilla (id, nombre, apellidos, fechaNacimiento, fechaIncorporacion, salario, pais, rol, especialidad, posicion, dorsal, altura, peso, goles, partidosJugados, rutaImagen, minutosJugados) VALUES
+     (1, 'Mark', 'Evans', '1995-01-01', '1995-01-01', 43694.2, 'Japón', 'Jugador', NULL, 'PORTERO', 20, 1.80, 75.97, 78, 61, 'images/mark_evans.png', 8387),
+     (2, 'Axel', 'Blaze', '1995-01-01', '1995-01-01', 55100.76, 'Japón', 'Jugador', NULL, 'DELANTERO', 11, 1.70, 61.06, 4, 96, 'images/axel_blaze.png', 12683),
+     (3, 'Jude', 'Sharp', '1995-01-01', '1995-01-01', 51083.94, 'Japón', 'Jugador', NULL, 'CENTROCAMPISTA', 9, 1.66, 57.28, 22, 72, 'images/jude_sharp.png', 10010),
+     (4, 'Shawn', 'Frost', '1995-01-01', '1995-01-01', 38431.72, 'Japón', 'Jugador', NULL, 'DELANTERO', 20, 1.83, 73.83, 72, 93, 'images/shawn_frost.png', 7737),
+     (5, 'Nathan', 'Swift', '1995-01-01', '1995-01-01', 39080.75, 'Japón', 'Jugador', NULL, 'DEFENSA', 3, 1.81, 59.79, 79, 107, 'images/nathan_swift.png', 14453),
+     (6, 'Jack', 'Wallside', '1995-01-01', '1995-01-01', 55876.91, 'Japón', 'Jugador', NULL, 'DEFENSA', 7, 1.76, 69.34, 2, 59, 'images/jack_wallside.png', 8099),
+     (7, 'Kevin', 'Dragonfly', '1995-01-01', '1995-01-01', 48990.67, 'Japón', 'Jugador', NULL, 'DELANTERO', 3, 1.65, 69.88, 12, 135, 'images/kevin_dragonfly.png', 15746),
+     (8, 'Erik', 'Eagle', '1995-01-01', '1995-01-01', 30878.25, 'Estados Unidos', 'Jugador', NULL, 'DELANTERO', 11, 1.64, 63.64, 40, 159, 'images/erik_eagle.png', 7018),
+     (9, 'Xavier', 'Foster', '1995-01-01', '1995-01-01', 35175.01, 'Japón', 'Jugador', NULL, 'CENTROCAMPISTA', 5, 1.74, 81.01, 31, 156, 'images/xavier_foster.png', 10318),
+     (10, 'Jordan', 'Greenway', '1995-01-01', '1995-01-01', 32386.93, 'Japón', 'Jugador', NULL, 'CENTROCAMPISTA', 7, 1.85, 68.42, 58, 167, 'images/jordan_greenway.png', 8924),
+     (11, 'Scott', 'Banyan', '1995-01-01', '1995-01-01', 36795.22, 'Japón', 'Jugador', NULL, 'CENTROCAMPISTA', 1, 1.89, 72.0, 15, 189, 'images/scott_banyan.png', 9243),
+     (12, 'Darren', 'LaChance', '1995-01-01', '1995-01-01', 41753.19, 'Japón', 'Jugador', NULL, 'PORTERO', 2, 1.78, 56.0, 6, 116, 'images/darren_lachance.png', 7896),
+     (13, 'Byron', 'Love', '1995-01-01', '1995-01-01', 43403.55, 'Corea del Sur', 'Jugador', NULL, 'CENTROCAMPISTA', 4, 1.79, 61.36, 53, 75, 'images/byron_love.png', 14546),
+     (14, 'Dave', 'Quagmire', '1995-01-01', '1995-01-01', 35010.61, 'Japón', 'Jugador', NULL, 'DEFENSA', 4, 1.78, 78.96, 9, 186, 'images/dave_quagmire.png', 12246),
+     (15, 'Caleb', 'Stonewall', '1995-01-01', '1995-01-01', 55638.33, 'Japón', 'Jugador', NULL, 'DEFENSA', 3, 1.70, 68.34, 37, 168, 'images/caleb_stonewall.png', 10268),
+     (16, 'Torch', NULL, '1995-01-01', '1995-01-01', 52612.61, 'Corea del Sur', 'Jugador', NULL, 'DELANTERO', 7, 1.73, 57.66, 49, 94, 'images/torch.png', 17238),
+     (17, 'Gazelle', NULL, '1995-01-01', '1995-01-01', 44985.27, 'Corea del Sur', 'Jugador', NULL, 'DELANTERO', 11, 1.82, 58.02, 77, 107, 'images/gazelle.png', 7385),
+     (18, 'Austin', 'Hobbes', '1995-01-01', '1995-01-01', 45601.24, 'Japón', 'Jugador', NULL, 'DELANTERO', 2, 1.72, 55.22, 70, 134, 'images/austin_hobbes.png', 15766),
+     (19, 'Seymour', 'Hillman', '1955-03-15', '1995-01-01', 65000.0, 'Inglaterra', 'Entrenador', 'ENTRENADOR_PRINCIPAL', NULL, NULL, NULL, NULL, NULL, 'images/seymour_hillman.png', NULL),
+     (20, 'Percival', 'Travis', '1958-08-22', '1995-01-01', 62000.0, 'Estados Unidos', 'Entrenador', 'ENTRENADOR_ASISTENTE', NULL, NULL, NULL, NULL, NULL, 'images/percival_travis.png', NULL),
+     (21, 'Aquilina', 'Schiller', '1962-11-10', '1995-01-01', 60000.0, 'Alemania', 'Entrenador', 'ENTRENADOR_PORTEROS', NULL, NULL, NULL, NULL, NULL, 'images/aquilina_schiller.png', NULL);

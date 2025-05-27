@@ -7,13 +7,13 @@ CREATE TABLE IF NOT EXISTS plantilla (
      salario NUMERIC NOT NULL,
      pais VARCHAR(50) NOT NULL,
      rol VARCHAR(50) NOT NULL,
+     especialidad VARCHAR(100),
      posicion VARCHAR(50),
      dorsal INTEGER,
      altura DOUBLE,
      peso DOUBLE,
      goles INTEGER,
      partidosJugados INTEGER,
-     especialidad VARCHAR(100),
      rutaImagen VARCHAR(255) DEFAULT 'images/default_profile.png',
      minutosJugados DOUBLE
 );
