@@ -18,7 +18,7 @@ interface PlantillaDao {
 
     //Consulta que selecciona miembros de la plantilla por su id
     @SqlQuery("SELECT * FROM plantilla WHERE id = :id")
-    fun findById(@Bind("id") id: Long): PlantillaEntity
+    fun findById(@Bind("id") id: Long?): PlantillaEntity
 
     //Consulta que añade miembros a la tabla plantilla
     @SqlUpdate("INSERT INTO plantilla (nombre, apellidos, fechaNacimiento, fechaIncorporacion, salario, pais, rol, posicion, dorsal, altura, peso, goles, partidosJugados, especialidad, rutaImagen, minutosJugados) VALUES (:nombre, :apellidos, :fechaNacimiento, :fechaIncorporacion, :salario, :pais, :rol, :posicion, :dorsal, :altura, :peso, :goles, :partidosJugados, :especialidad, :rutaImagen, :minutosJugados)")
@@ -28,7 +28,7 @@ interface PlantillaDao {
 
     //Cosulta que elimina a un miembro de la plantilla por id
     @SqlUpdate("DELETE FROM plantilla WHERE id = :id")
-    fun delete(@Bind("id") id: Long) : Long?
+    fun delete(@Bind("id") id: Long?) : Long?
 
     //Consulta que elimina toda la informacion de miembros de la plantilla por id
     @SqlUpdate("DELETE FROM plantilla")
