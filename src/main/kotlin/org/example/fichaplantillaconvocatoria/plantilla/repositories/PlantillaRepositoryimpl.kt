@@ -12,7 +12,6 @@ class PlantillaRepositoryImpl (
     val dao : PlantillaDao
 ) : PlantillaRepository {
 
-    private val plantilla = mutableMapOf<Long, Plantilla>()
     private val logger = logging()
 
     init {
@@ -34,7 +33,7 @@ class PlantillaRepositoryImpl (
     //Función que busca a un miembro de la plantilla por id
     override fun findById(id: Long): Plantilla? {
         logger.debug { "Buscando un miembro de la plantilla por id : $id" }
-        return dao.findById(id).toModel()
+        return dao.findById(id)?.toModel()
     }
 
     //Para guardar un miembro
@@ -48,7 +47,7 @@ class PlantillaRepositoryImpl (
     //Función que borra el identificador de un miembro de la plantilla
     override fun deleteById(id: Long?) {
         logger.debug { "Eliminando miembro de la plantilla : $id" }
-        val plantilla: Plantilla? = dao.findById(id).toModel()
+        val plantilla: Plantilla? = dao.findById(id)?.toModel()
         if (plantilla != null) {
             val res = dao.delete(id)
             if (res == 0L) {

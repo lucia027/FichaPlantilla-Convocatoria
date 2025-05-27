@@ -18,13 +18,12 @@ interface PlantillaDao {
 
     //Consulta que selecciona miembros de la plantilla por su id
     @SqlQuery("SELECT * FROM plantilla WHERE id = :id")
-    fun findById(@Bind("id") id: Long?): PlantillaEntity
+    fun findById(@Bind("id") id: Long?): PlantillaEntity?
 
     //Consulta que añade miembros a la tabla plantilla
     @SqlUpdate("INSERT INTO plantilla (nombre, apellidos, fechaNacimiento, fechaIncorporacion, salario, pais, rol, posicion, dorsal, altura, peso, goles, partidosJugados, especialidad, rutaImagen, minutosJugados) VALUES (:nombre, :apellidos, :fechaNacimiento, :fechaIncorporacion, :salario, :pais, :rol, :posicion, :dorsal, :altura, :peso, :goles, :partidosJugados, :especialidad, :rutaImagen, :minutosJugados)")
     @GetGeneratedKeys
     fun save(@BindBean personalEntity: PlantillaEntity): Long
-
 
     //Cosulta que elimina a un miembro de la plantilla por id
     @SqlUpdate("DELETE FROM plantilla WHERE id = :id")
@@ -37,7 +36,5 @@ interface PlantillaDao {
 }
 
 fun providePlantillaDao(jdbi: Jdbi): PlantillaDao {
-    val logger = logging()
-    logger.debug { "Inicializando AlumnosDao" }
     return jdbi.onDemand(PlantillaDao::class.java)
 }

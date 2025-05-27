@@ -1,6 +1,7 @@
 package org.example.fichaplantillaconvocatoria.plantilla.viewmodel
 
 import com.github.michaelbull.result.*
+import com.github.michaelbull.result.map
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import org.example.fichaplantillaconvocatoria.plantilla.service.PlantillaService
@@ -14,6 +15,7 @@ import javafx.scene.image.Image
 import kotlin.String
 import java.io.File
 import kotlin.collections.map
+import kotlin.toString
 
 private val logger = logging()
 
@@ -103,28 +105,26 @@ class PlantillaViewModel(
 
     fun loadPlantillaJson(file: File, withImages: Boolean = false): Result<List<Plantilla>, PlantillaError> {
         return servicio.deleteAllImages().andThen {
-            servicio.loadDataJson(file).andThen { listaPlantilla ->
-                servicio.deleteAll().andThen {
-                    servicio.saveAll(
-                        if (withImages)
-                            listaPlantilla
-                        else
-                            listaPlantilla.map { a -> a.copy(id = Plantilla.NEW_ID, rutaImagen = TipoImagen.SIN_IMAGEN.value) }
-                    )
-                }.onSuccess {
-                    loadAllPlantilla()
-                    Ok(listaPlantilla)
-                }
+            servicio.loadDataJson(file).onSuccess {
+                servicio.deleteAll() // Borramos todos los datos de la BD
+                servicio.saveAll(
+                    if (withImages)
+                        it
+                    else
+                        it.map { a -> a.copy(id = Plantilla.NEW_ID, rutaImagen = TipoImagen.SIN_IMAGEN.value) }
+                )
+                loadAllPlantilla() // Actualizamos la lista
             }
         }
     }
+
 
     fun updatePlantillaSelecionado(plantilla: Plantilla) {
         var imagen = Image(RoutesManager.getResourceAsStream("images/default_profile.png"))
         var fileImage = File(RoutesManager.getResource("images/default_profile.png").toURI())
 
         servicio.loadImage(plantilla.rutaImagen).onSuccess {
-            imagen = Image(it.toString())
+            imagen = Image(it.absoluteFile.toURI().toString())
             fileImage = it
         }
 
@@ -190,6 +190,7 @@ class PlantillaViewModel(
 //    }
 
     /*
+
     fun updateImagePlantilaOperacio(fileImage: File, jugador: JugadorState, entrenador: EntrenadorState){
         state.value = state.value.copy(
             plantilla = state.value.plantilla.map { plantilla ->
@@ -209,6 +210,7 @@ class PlantillaViewModel(
         )
     }
     */
+
 
     fun exportToZip(fileToZip: File): Result<Unit, PlantillaError> {
         servicio.findAll().andThen {

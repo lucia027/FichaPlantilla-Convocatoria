@@ -37,8 +37,8 @@ class Config {
     fun readProperty(key: String): String? {
         return try {
             val properties = Properties()
-            val inputStream : InputStream = ClassLoader.getSystemResourceAsStream(CONFIG_FILE_NAME) ?:
-            throw Exception("No se puede leer la configuracion $CONFIG_FILE_NAME")
+            val inputStream : InputStream = ClassLoader.getSystemResourceAsStream(CONFIG_FILE_NAME)
+                ?: throw Exception("No se puede leer la configuracion $CONFIG_FILE_NAME")
             properties.load(inputStream)
             properties.getProperty(key)
         } catch (e : Exception) {
