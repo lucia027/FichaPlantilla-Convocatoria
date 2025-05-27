@@ -27,7 +27,6 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
 import kotlin.io.path.name
-import kotlin.math.log
 
 class PlantillaServiceImpl (
     private val repository: PlantillaRepository,
@@ -180,8 +179,8 @@ class PlantillaServiceImpl (
         }
     }
 
-    override fun loadImage(imgName: String): Result<File, PlantillaError> {
-        val file = File(config.imagesDirectory + imgName)
+    override fun loadImage(imgnName: String): Result<File, PlantillaError> {
+        val file = File(config.imagesDirectory + imgnName)
         return if (file.exists()) {
             Ok(file)
         } else {
