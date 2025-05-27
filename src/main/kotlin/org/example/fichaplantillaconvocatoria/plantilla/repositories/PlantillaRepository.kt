@@ -5,8 +5,8 @@ import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
 interface PlantillaRepository {
     fun findAll(): List<Plantilla>
     fun findById(id: Long): Plantilla?
-    fun save(alumno: Plantilla): Plantilla
-    fun deleteById(id: Long)
+    fun save(plantilla: Plantilla): Plantilla
+    fun deleteById(id: Long?)
     fun deleteAll()
-    fun saveAll(alumnos: List<Plantilla>): List<Plantilla>
+    fun saveAll(plantilla: List<Plantilla>): List<Plantilla>
 }
