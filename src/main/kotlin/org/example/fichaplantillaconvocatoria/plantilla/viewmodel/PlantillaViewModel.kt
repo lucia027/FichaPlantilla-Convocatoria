@@ -3,14 +3,11 @@ package org.example.fichaplantillaconvocatoria.plantilla.viewmodel
 import com.github.michaelbull.result.*
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
-import org.example.fichaplantillaconvocatoria.plantilla.mapper.toEntrenador
-import org.example.fichaplantillaconvocatoria.plantilla.mapper.toJugador
 import org.example.fichaplantillaconvocatoria.plantilla.service.PlantillaService
 import org.example.fichaplantillaconvocatoria.plantilla.error.PlantillaError
 import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
 import org.example.fichaplantillaconvocatoria.plantilla.models.Jugador
 import org.example.fichaplantillaconvocatoria.plantilla.models.Entrenador
-import org.example.fichaplantillaconvocatoria.plantilla.mapper.toModel
 import org.example.fichaplantillaconvocatoria.routes.RoutesManager
 import org.lighthousegames.logging.logging
 import javafx.scene.image.Image
@@ -90,10 +87,10 @@ class PlantillaViewModel(
     fun plantillaFilteredList(tipo: String, nombre: String): List<Plantilla>{
         return state.value.plantilla
             .filter { plantilla ->
-                when (tipo){
-                    TipoFiltro.JUGADOR.value -> true
-                    TipoFiltro.ENTRENADOR.value -> true
-                    else -> false
+                when (tipo) {
+                    TipoFiltro.JUGADOR.value -> plantilla.rol == "Jugador"
+                    TipoFiltro.ENTRENADOR.value -> plantilla.rol == "Entrenador"
+                    else -> true
                 }
             }.filter { plantilla ->
                 plantilla.nombre.contains(nombre, true)
@@ -149,9 +146,9 @@ class PlantillaViewModel(
 //                    goles = plantilla.goles,
 //                    partidosJugados = plantilla.partidosJugados,
 //                    minutosJugados = plantilla.minutosJugados,
-                ) as Jugador)
-
+                ))
             )
+
             "Entrenador" -> state.value = state.value.copy(
                 entrenador = listOf(PlantillaState(
                     id = plantilla.id,
@@ -163,7 +160,7 @@ class PlantillaViewModel(
                     pais = plantilla.pais,
                     rol = plantilla.rol,
 //                    especialidad = plantilla.especialidad
-                ) as Entrenador)
+                ))
             )
         }
     }
@@ -175,22 +172,22 @@ class PlantillaViewModel(
 //   fun crearEntrenador(): Result<Entrenador, PlantillaError> {}
 //   fun editarPlantilla(): Result<Plantilla, PlantillaError> {}
 
-    fun eliminarMiembro(): Result<Unit, PlantillaError> {
-        val miembro = (state.value.plantilla.find { it.id.toLong() == it.id.toLong() } ) as PlantillaState
-        val myId = miembro.id.toLong()
-
-        miembro.fileImage.let { file ->
-            if (file?.name != TipoImagen.SIN_IMAGEN.value) {
-                servicio.deleteImage(file!!)
-            }
-        }
-
-        servicio.deleteById(myId)
-        state.value = state.value.copy(plantilla = state.value.plantilla.toMutableList().apply{ this.removeIf { it.id == myId } })
-
-        updateActualState()
-        return Ok(Unit)
-    }
+//    fun eliminarMiembro(): Result<Unit, PlantillaError> {
+//        val miembro = (state.value.plantilla.find { it.id.toLong() == it.id.toLong() } )
+//        val myId = miembro?.id?.toLong()
+//
+//        miembro.fileImage.let { file ->
+//            if (file?.name != TipoImagen.SIN_IMAGEN.value) {
+//                servicio.deleteImage(file!!)
+//            }
+//        }
+//
+//        servicio.deleteById(myId)
+//        state.value = state.value.copy(plantilla = state.value.plantilla.toMutableList().apply{ this.removeIf { it.id == myId } })
+//
+//        updateActualState()
+//        return Ok(Unit)
+//    }
 
     /*
     fun updateImagePlantilaOperacio(fileImage: File, jugador: JugadorState, entrenador: EntrenadorState){
@@ -287,15 +284,15 @@ class PlantillaViewModel(
     }
 
     enum class TipoFiltro(val value: String) {
-        JUGADOR("Jugador: si"), ENTRENADOR("Entrenador: si")
+        JUGADOR("Jugador"), ENTRENADOR("Entrenador")
     }
 
     data class ExpedienteState(
         //Contenedores
         val typesPlantilla: List<String> = emptyList(),
         val plantilla: List<Plantilla> = emptyList(),
-        val jugador: List<Jugador> = emptyList(),
-        val entrenador: List<Entrenador> = emptyList(),
+        val jugador: List<PlantillaState> = emptyList(),
+        val entrenador: List<PlantillaState> = emptyList(),
 
         //Variables de las consultas de jugadores
         val pesoMinimo: Double = 0.0,
