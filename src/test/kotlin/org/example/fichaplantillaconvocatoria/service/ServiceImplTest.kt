@@ -2,16 +2,12 @@ package org.example.fichaplantillaconvocatoria.service
 
 import com.github.benmanes.caffeine.cache.Cache
 import org.example.fichaplantillaconvocatoria.plantilla.dao.EntrenadorEntity
-import org.example.fichaplantillaconvocatoria.plantilla.dao.PlantillaDao
 import org.example.fichaplantillaconvocatoria.plantilla.dao.PlantillaEntity
 import org.example.fichaplantillaconvocatoria.plantilla.mapper.toModel
 import org.example.fichaplantillaconvocatoria.plantilla.models.Entrenador
 import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
-import org.example.fichaplantillaconvocatoria.plantilla.repositories.PlantillaRepository
 import org.example.fichaplantillaconvocatoria.plantilla.repositories.PlantillaRepositoryImpl
 import org.example.fichaplantillaconvocatoria.plantilla.service.PlantillaServiceImpl
-
-import org.example.fichaplantillaconvocatoria.plantilla.validator.PlantillaValidator
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
