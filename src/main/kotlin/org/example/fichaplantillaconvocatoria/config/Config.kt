@@ -22,7 +22,7 @@ class Config {
         readProperty("database.init.tables") ?.toBoolean() ?: false
     }
 
-    val dataBaseInitData : Boolean by lazy {
+    val databaseInitData : Boolean by lazy {
         readProperty("database.init.data") ?.toBoolean() ?: false
     }
 
