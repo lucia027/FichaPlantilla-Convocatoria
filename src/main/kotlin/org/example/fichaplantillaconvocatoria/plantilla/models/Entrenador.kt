@@ -15,8 +15,8 @@ class Entrenador(
     salario: Double?,
     pais: String,
     rol: String = "Entrenador",
-    var especialidad: String,
-    rutaImagen: String
+    rutaImagen: String,
+    var especialidad: String
 ) : Plantilla(id, nombre, apellidos, fechaNacimiento, fechaIncorporacion, salario, pais, rol, rutaImagen){ //tipo){
 
     /**
@@ -40,7 +40,7 @@ class Entrenador(
         rol: String,
         rutaImagen: String,
     ): Plantilla {
-        return Entrenador(id, nombre, apellidos, fechaNacimiento, fechaIncorporacion, salario, pais, rol, this.especialidad, rutaImagen)
+        return Entrenador(id, nombre, apellidos, fechaNacimiento, fechaIncorporacion, salario, pais, rol, rutaImagen, this.especialidad)
     }
 
     /**

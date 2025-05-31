@@ -15,14 +15,14 @@ class Jugador(
     salario: Double?,
     pais: String,
     rol: String = "Jugador",
+    rutaImagen: String = "",
     var posicion: String?,
     var dorsal: Int?,
     var altura: Double?,
     var peso: Double?,
     var goles: Int,
     var partidosJugados: Int,
-    var minutosJugados: Double?,
-    rutaImagen: String = ""
+    var minutosJugados: Double?
 ): Plantilla(id, nombre, apellidos, fechaNacimiento, fechaIncorporacion, salario, pais, rol, rutaImagen) {
 
     /**
@@ -46,7 +46,7 @@ class Jugador(
         rol: String,
         rutaImagen: String
     ): Plantilla {
-        return Jugador(id, nombre, apellidos, fechaNacimiento, fechaIncorporacion, salario, pais, rol, this.posicion, this.dorsal, this.altura, this.peso, this.goles, this.partidosJugados, this.minutosJugados, rutaImagen)
+        return Jugador(id, nombre, apellidos, fechaNacimiento, fechaIncorporacion, salario, pais, rol, rutaImagen, this.posicion, this.dorsal, this.altura, this.peso, this.goles, this.partidosJugados, this.minutosJugados)
     }
 
     /**
