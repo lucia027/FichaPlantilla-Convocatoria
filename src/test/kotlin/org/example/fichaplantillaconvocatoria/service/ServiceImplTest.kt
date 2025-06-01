@@ -1,12 +1,14 @@
 package org.example.fichaplantillaconvocatoria.service
 
 import com.github.benmanes.caffeine.cache.Cache
+import org.example.fichaplantillaconvocatoria.config.Config
 import org.example.fichaplantillaconvocatoria.plantilla.dao.EntrenadorEntity
 import org.example.fichaplantillaconvocatoria.plantilla.dao.PlantillaEntity
 import org.example.fichaplantillaconvocatoria.plantilla.mapper.toModel
 import org.example.fichaplantillaconvocatoria.plantilla.models.Entrenador
 import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
 import org.example.fichaplantillaconvocatoria.plantilla.repositories.PlantillaRepositoryImpl
+import org.example.fichaplantillaconvocatoria.plantilla.service.PlantillaService
 import org.example.fichaplantillaconvocatoria.plantilla.service.PlantillaServiceImpl
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
@@ -18,6 +20,10 @@ import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.*
 
+
+/*
+ * Clase que implementa los test del servicio
+ */
 @ExtendWith(MockitoExtension::class)
 class ServiceImplMockitoTest {
 
@@ -29,6 +35,9 @@ class ServiceImplMockitoTest {
 
     @InjectMocks
     private lateinit var servicio: PlantillaServiceImpl
+
+    @InjectMocks
+    private lateinit var config: Config
 
     @Nested
     @DisplayName("Casos correctos")
@@ -158,7 +167,7 @@ class ServiceImplMockitoTest {
                 id = 1,
                 nombre = "Pedro",
                 apellidos = "Gutierrez",
-                fechaNacimiento = "1970-01-01",
+                fechaNacimiento = "1990-01-01",
                 fechaIncorporacion = "1990-01-01",
                 salario = 1000.0,
                 pais = "",

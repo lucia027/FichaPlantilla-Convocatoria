@@ -14,6 +14,9 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
+/*
+ * Clase que implementa los test del validador de la plantilla
+ */
 class PlantillaValidatorTest {
 
     private lateinit var validator: Validator<Plantilla, PlantillaError>

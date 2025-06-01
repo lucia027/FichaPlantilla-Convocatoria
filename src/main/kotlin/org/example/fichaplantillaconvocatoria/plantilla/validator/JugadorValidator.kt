@@ -6,6 +6,9 @@ import com.github.michaelbull.result.Result
 import org.example.fichaplantillaconvocatoria.plantilla.error.PlantillaError
 import org.example.fichaplantillaconvocatoria.plantilla.models.Jugador
 
+/*
+ * Clase que desarrolla la funcion validate para jugador
+ */
 class JugadorValidator : Validator<Jugador, PlantillaError> {
     override fun validate(t: Jugador): Result<Jugador, PlantillaError> {
         if (t.nombre.isBlank()) {

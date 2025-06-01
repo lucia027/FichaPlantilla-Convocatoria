@@ -7,6 +7,9 @@ import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
 import org.lighthousegames.logging.logging
 import java.util.concurrent.TimeUnit
 
+/*
+ * Funcion que configura los datos de la cache sacados de la configuracion.
+ */
 fun providePersonalCache(config : Config): Cache<Long, Plantilla> {
     return Caffeine.newBuilder()
         .maximumSize(config.cacheCapacity)

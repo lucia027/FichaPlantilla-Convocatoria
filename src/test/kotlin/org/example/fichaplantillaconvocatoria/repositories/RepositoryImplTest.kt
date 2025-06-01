@@ -17,6 +17,9 @@ import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.*
 
+/*
+ * Clase que implementa los test del respositorio
+ */
 @ExtendWith(MockitoExtension::class)
 class TestPrueba {
 
@@ -108,23 +111,22 @@ class TestPrueba {
         @DisplayName("Deberia de salvar un miembro")
         fun save() {
             val plantillaEntity = PlantillaEntity(
-                id = 2,
+                id = 1,
                 nombre = "Pedro",
                 apellidos = "Gutierrez",
-                fechaNacimiento = "1970-01-01",
+                fechaNacimiento = "1990-01-01",
                 fechaIncorporacion = "1990-01-01",
                 salario = 1000.0,
                 pais = "España",
                 rol = "Entrenador",
                 rutaImagen = "",
-
                 )
 
             whenever(dao.save(argThat {
-                id == 2L &&
+                id == 1L &&
                         nombre == "Pedro" &&
                         apellidos == "Gutierrez" &&
-                        fechaNacimiento == "1970-01-01" &&
+                        fechaNacimiento == "1990-01-01" &&
                         fechaIncorporacion == "1990-01-01" &&
                         salario == 1000.0 &&
                         pais == "España" &&
@@ -135,10 +137,10 @@ class TestPrueba {
 
             assertAll(
                 { assertNotNull(plantillaEntity, "Plantilla no nulo") },
-                { assertEquals(2L, plantillaSave.id, "Casilla id correcta") },
+                { assertEquals(1L, plantillaSave.id, "Casilla id correcta") },
                 { assertEquals("Pedro", plantillaSave.nombre, "Casilla nombre correcta") },
                 { assertEquals("Gutierrez", plantillaSave.apellidos, "Casilla apellidos correcta") },
-                { assertEquals("1970-01-01", plantillaSave.fechaNacimiento, "Casilla fecha nacimiento correcta") },
+                { assertEquals("1990-01-01", plantillaSave.fechaNacimiento, "Casilla fecha nacimiento correcta") },
                 { assertEquals("1990-01-01", plantillaSave.fechaIncorporacion, "Casilla fecha incorporacion correcta") },
                 { assertEquals(1000.0, plantillaSave.salario, "Casilla salario correcta") },
                 { assertEquals("España", plantillaSave.pais, "Casilla pais correcta") },

@@ -14,6 +14,10 @@ import org.example.fichaplantillaconvocatoria.plantilla.viewmodel.PlantillaViewM
 import org.jdbi.v3.core.Jdbi
 import org.koin.dsl.module
 
+/*
+ * Encargado de hacer ciertas partes del programa como singleton
+ */
+
 val appModule = module {
     single<Config> {
         Config()

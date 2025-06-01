@@ -5,7 +5,9 @@ import java.io.InputStream
 import java.util.Properties
 
 private const val CONFIG_FILE_NAME = "config.properties"
-
+/*
+ * Clase que establece la configuracion por defecto del sistema
+ */
 class Config {
     val APP_PATH = System.getProperty("user.dir")
 

@@ -9,6 +9,9 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery
 import org.jdbi.v3.sqlobject.statement.SqlUpdate
 import org.lighthousegames.logging.logging
 
+/**
+ * Interfaz que implementa las consultas basicas.
+ */
 @RegisterKotlinMapper(PlantillaEntity::class)
 interface PlantillaDao {
 
@@ -23,7 +26,7 @@ interface PlantillaDao {
     //Consulta que añade miembros a la tabla plantilla
     @SqlUpdate("INSERT INTO plantilla (nombre, apellidos, fechaNacimiento, fechaIncorporacion, salario, pais, rol, posicion, dorsal, altura, peso, goles, partidosJugados, especialidad, rutaImagen, minutosJugados) VALUES (:nombre, :apellidos, :fechaNacimiento, :fechaIncorporacion, :salario, :pais, :rol, :posicion, :dorsal, :altura, :peso, :goles, :partidosJugados, :especialidad, :rutaImagen, :minutosJugados)")
     @GetGeneratedKeys
-    fun save(@BindBean personalEntity: PlantillaEntity): Long
+    fun save(@BindBean plantillaEntity: PlantillaEntity): Long
 
     //Cosulta que elimina a un miembro de la plantilla por id
     @SqlUpdate("DELETE FROM plantilla WHERE id = :id")

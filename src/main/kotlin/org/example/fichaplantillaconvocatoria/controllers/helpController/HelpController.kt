@@ -5,6 +5,9 @@ import javafx.fxml.FXML
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
+/*
+ * Clase que se encarga de conectar las funciones con la interfaz de acerca de y desarrolarlas
+ */
 class HelpController {
 
     @FXML

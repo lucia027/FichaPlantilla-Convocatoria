@@ -5,6 +5,9 @@ import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
 import com.github.michaelbull.result.Result
 import java.io.File
 
+/*
+ * Intefaz que define todas las funciones del service y ademas en esta caso tambien las normalmente ubicadas en storage
+ */
 interface PlantillaService {
     fun findAll(): Result<List<Plantilla>, PlantillaError>
     fun findById(id: Long): Result<Plantilla, PlantillaError>

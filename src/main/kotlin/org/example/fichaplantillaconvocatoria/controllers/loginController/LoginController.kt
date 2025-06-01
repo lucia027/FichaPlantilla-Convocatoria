@@ -7,6 +7,10 @@ import org.lighthousegames.logging.logging
 import org.mindrot.jbcrypt.BCrypt
 
 private val logger = logging()
+
+/*
+ * Clase que se encarga de conectar las funciones con la interfaz de login y desarrolarlas
+ */
 class LoginController {
 
     @FXML

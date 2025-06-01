@@ -18,6 +18,9 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 private val logger = logging()
+/*
+ * Clase que se encarga de conectar las funciones con la interfaz principal y desarrolarlas
+ */
 class HelloController : KoinComponent {
 
     private val viewModel: PlantillaViewModel by inject()

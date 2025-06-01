@@ -10,6 +10,9 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
+/*
+ * Clase que implementa los test del validador del entrenador
+ */
 class EntrenadorValidatorTest {
     private var validator = EntrenadorValidator()
 

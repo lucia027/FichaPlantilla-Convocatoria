@@ -8,6 +8,9 @@ import org.example.fichaplantillaconvocatoria.plantilla.mapper.toEntity
 import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
 import org.lighthousegames.logging.logging
 
+/*
+ * Clase que implemneta las funciones de la interfaz del respositorio
+ */
 class PlantillaRepositoryImpl (
     val dao : PlantillaDao
 ) : PlantillaRepository {

@@ -10,6 +10,9 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 
+/*
+ * Clase que implementa los test del validador del jugador
+ */
 class JugadorValidatorTest {
 
     private var validator = JugadorValidator()
