@@ -5,6 +5,9 @@ import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
 import com.github.michaelbull.result.Result
 import java.io.File
 
+/*
+ * Intefaz que define todas las funciones del service y ademas en esta caso tambien las normalmente ubicadas en storage
+ */
 interface PlantillaService {
     fun findAll(): Result<List<Plantilla>, PlantillaError>
     fun findById(id: Long): Result<Plantilla, PlantillaError>
@@ -17,7 +20,7 @@ interface PlantillaService {
     fun storageDataJson(file: File, data: List<Plantilla>): Result<Long, PlantillaError>
     fun deleteAllImages(): Result<Long, PlantillaError>
     fun loadDataJson(file: File): Result<List<Plantilla>, PlantillaError>
-    fun loadImage(imagenName: String): Result<File, PlantillaError>
+    fun loadImage(imgnName: String): Result<File, PlantillaError>
     fun saveImage(fileName: File):Result<File, PlantillaError>
     fun deleteImage(fileName: File):Result<Unit, PlantillaError>
     fun exportToZip(zipFile: File, data: List<Plantilla>): Result<File, PlantillaError>

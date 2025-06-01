@@ -14,22 +14,26 @@ import org.example.fichaplantillaconvocatoria.plantilla.viewmodel.PlantillaViewM
 import org.jdbi.v3.core.Jdbi
 import org.koin.dsl.module
 
+/*
+ * Encargado de hacer ciertas partes del programa como singleton
+ */
+
 val appModule = module {
-    single<Jdbi> { provideDatabaseManager(
+    single<Config> {
+        Config()
+    }
+
+    single<Jdbi> {provideDatabaseManager(
+            get())
+    }
+
+    single<Cache<Long, Plantilla>> { providePersonalCache(
         config = get()
     ) }
 
     single<PlantillaDao> { providePlantillaDao(
         jdbi = get()
     ) }
-
-    single<Cache<Long, Plantilla>> { providePersonalCache(
-        config = get()
-    ) }
-
-    single<Config> {
-        Config()
-    }
 
     single<PlantillaRepository> { PlantillaRepositoryImpl(
         get()

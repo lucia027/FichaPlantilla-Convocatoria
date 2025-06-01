@@ -4,7 +4,6 @@ import org.example.fichaplantillaconvocatoria.plantilla.dao.EntrenadorEntity
 import org.example.fichaplantillaconvocatoria.plantilla.dto.EntrenadorDto
 import org.example.fichaplantillaconvocatoria.plantilla.dto.PlantillaDto
 import org.example.fichaplantillaconvocatoria.plantilla.models.Entrenador
-import org.example.fichaplantillaconvocatoria.plantilla.viewmodel.PlantillaViewModel.EntrenadorState
 
 /**
  * Función que convierte un modelo a dto
@@ -103,20 +102,20 @@ fun EntrenadorDto.toEntity(): EntrenadorEntity {
     )
 }
 
-/**
- * Función que convierte un state a modelo
- */
-fun EntrenadorState.toModel() : Entrenador {
-    return Entrenador(
-        id = this.id,
-        nombre = this.nombre,
-        apellidos = this.apellidos,
-        fechaNacimiento = this.fechaNacimiento,
-        fechaIncorporacion = this.fechaIncorporacion,
-        salario = this.salario,
-        pais = this.pais,
-        especialidad = this.especialidad,
-        rol = this.rol,
-        rutaImagen = this.rutaImagen.toString()
-    )
-}
+///**
+// * Función que convierte un state a modelo
+// */
+//fun EntrenadorState.toModel() : Entrenador {
+//    return Entrenador(
+//        id = this.id,
+//        nombre = this.nombre,
+//        apellidos = this.apellidos,
+//        fechaNacimiento = this.fechaNacimiento,
+//        fechaIncorporacion = this.fechaIncorporacion,
+//        salario = this.salario,
+//        pais = this.pais,
+//        especialidad = this.especialidad,
+//        rol = this.rol,
+//        rutaImagen = this.rutaImagen.toString()
+//    )
+//}

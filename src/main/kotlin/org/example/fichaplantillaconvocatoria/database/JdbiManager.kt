@@ -6,6 +6,9 @@ import org.jdbi.v3.core.kotlin.KotlinPlugin
 import org.jdbi.v3.sqlobject.SqlObjectPlugin
 import org.lighthousegames.logging.logging
 
+/*
+ * Clase que gestiona la base de datos y sus tablas
+ */
 class JdbiManager (
     private val databaseUrl: String,
     private val databaseInitTables: Boolean

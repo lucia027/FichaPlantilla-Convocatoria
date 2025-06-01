@@ -27,7 +27,6 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
 import kotlin.io.path.name
-import kotlin.math.log
 
 class PlantillaServiceImpl (
     private val repository: PlantillaRepository,
@@ -133,6 +132,7 @@ class PlantillaServiceImpl (
         }
     }
 
+    //Funcion que guarda los datos de un json
     override fun storageDataJson(file: File, data: List<Plantilla>): Result<Long, PlantillaError> {
         logger.debug { "Guardando datos en fichero $file" }
         return try {
@@ -148,12 +148,14 @@ class PlantillaServiceImpl (
         }
     }
 
+    //Funcion encargada de devolver mediante la url la imagen
     private fun getImagenName(newFileImage: File): String {
         val name = newFileImage.name
         val extension = name.substring(name.lastIndexOf(".") + 1)
         return "${Instant.now().toEpochMilli()}.$extension"
     }
 
+    //Funcion encargada de borrar todads las imagenes
     override fun deleteAllImages(): Result<Long, PlantillaError> {
         return try {
             Ok(
@@ -166,6 +168,7 @@ class PlantillaServiceImpl (
         }
     }
 
+    //Funcion encargada de cargar los datos desde un json
     override fun loadDataJson(file: File): Result<List<Plantilla>, PlantillaError> {
         val json = Json {
             prettyPrint = true
@@ -180,8 +183,9 @@ class PlantillaServiceImpl (
         }
     }
 
-    override fun loadImage(imgName: String): Result<File, PlantillaError> {
-        val file = File(config.imagesDirectory + imgName)
+    //Funcion encargada de cargar la imagen
+    override fun loadImage(imgnName: String): Result<File, PlantillaError> {
+        val file = File(config.imagesDirectory + imgnName)
         return if (file.exists()) {
             Ok(file)
         } else {
@@ -189,6 +193,7 @@ class PlantillaServiceImpl (
         }
     }
 
+    //Funcion encargada de guadrar la imagen
     override fun saveImage(fileName: File): Result<File, PlantillaError> {
         return try {
             val newImage = File(config.imagesDirectory + getImagenName(fileName))
@@ -199,11 +204,14 @@ class PlantillaServiceImpl (
         }
     }
 
+
+    //Funcion encargada de elimianr la imagen
     override fun deleteImage(fileName: File): Result<Unit, PlantillaError> {
         Files.deleteIfExists(fileName.toPath())
         return Ok(Unit)
     }
 
+    //Funcion encargada de exportar en formato zip
     override fun exportToZip(zipFile: File, data: List<Plantilla>): Result<File, PlantillaError> {
         logger.debug { "Exportando a ZIP $zipFile" }
         val tempDir = Files.createTempDirectory(tempDir)
@@ -240,6 +248,7 @@ class PlantillaServiceImpl (
         }
     }
 
+    //Funcion encargada de cargar los datos desde un formato zip
     override fun loadFromZip(unzipFile: File): Result<List<Plantilla>, PlantillaError> {
         logger.debug { "Importando desde ZIP $unzipFile" }
         val tempDir = Files.createTempDirectory(tempDir)
@@ -274,6 +283,7 @@ class PlantillaServiceImpl (
         }
     }
 
+    //Funcion encargada de actualizar la imagen
     override fun updateImage(imgName: String, newFileImg: File): Result<File, PlantillaError> {
         return try {
             val newImage = File(config.imagesDirectory + imgName)

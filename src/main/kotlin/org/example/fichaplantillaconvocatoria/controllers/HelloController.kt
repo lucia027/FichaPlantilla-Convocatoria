@@ -1,6 +1,5 @@
 package org.example.fichaplantillaconvocatoria.controllers
 
-import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
@@ -12,29 +11,39 @@ import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
 import org.example.fichaplantillaconvocatoria.routes.RoutesManager
 import org.lighthousegames.logging.logging
 import javafx.scene.input.KeyCode
+import org.example.fichaplantillaconvocatoria.plantilla.models.Entrenador
+import org.example.fichaplantillaconvocatoria.plantilla.models.Jugador
 import org.example.fichaplantillaconvocatoria.plantilla.viewmodel.PlantillaViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 private val logger = logging()
+/*
+ * Clase que se encarga de conectar las funciones con la interfaz principal y desarrolarlas
+ */
 class HelloController : KoinComponent {
-
 
     private val viewModel: PlantillaViewModel by inject()
 
 
     // Elementos de la interfaz para vincular con fx:id en el FXML
     @FXML
-    private lateinit var modoEdicionToggle: ToggleButton
+    private lateinit var cambioUser: ToggleButton
 
     @FXML
     private lateinit var menuHelp: MenuItem
 
     @FXML
-    private lateinit var menuExportar: MenuItem
+    private lateinit var menuExportarJson: MenuItem
 
     @FXML
-    private lateinit var menuImportar: MenuItem
+    private lateinit var menuImportarJson: MenuItem
+
+    @FXML
+    private lateinit var menuExportarZip: MenuItem
+
+    @FXML
+    private lateinit var menuImportarZip: MenuItem
 
     @FXML
     private lateinit var menuPegar: MenuItem
@@ -44,9 +53,6 @@ class HelloController : KoinComponent {
 
     @FXML
     private lateinit var menuSalir: MenuItem
-
-    @FXML
-    private lateinit var menuGuardar: MenuItem
 
     @FXML
     private lateinit var menuAbrir: MenuItem
@@ -187,21 +193,29 @@ class HelloController : KoinComponent {
     private lateinit var salarioMaximoField: TextField
 
     @FXML
-    private lateinit var golePromedioField: TextField
+    private lateinit var golesPromedioField: TextField
+
+    @FXML
+    private lateinit var pesoMinimoField: TextField
+
+    @FXML
+    private lateinit var minutosPromedioField: TextField
 
     @FXML
     private lateinit var filterComboBox: ComboBox<String>
 
     @FXML
-    lateinit var sliderTable: Slider
+    private lateinit var searchText: TextField
 
 
 
     @FXML
     fun initialize() {
+        initDefaultValues()
+
+        initBindings()
 
         initEvents()
-        initDefaultValues()
 
         //Las añado aqui por qué si no hay que hacer click dos veces para que se inicialice
         onComboBoxAction()
@@ -210,25 +224,13 @@ class HelloController : KoinComponent {
         println("Cargando datos: ${viewModel.state.value.plantilla}")
     }
 
-    fun initEvents() {
-        logger.debug { "Iniciando eventos" }
-        menuHelp.setOnAction { onHelpAction() }
-        menuSalir.setOnAction { RoutesManager.onAppExit() }
-        añadirButton.setOnAction { onAddMemberAction()}
-    }
-
-    fun onHelpAction() {
-        logger.debug { "onHelpAction" }
-        RoutesManager.initHelpStage()
-    }
-
     fun initDefaultValues() {
         logger.info { "Iniciando valores por defecto" }
 
-        viewModel.state.addListener { _, _, newState ->
-            plantillaTable.items = FXCollections.observableArrayList(newState.plantilla)
-        }
+        //Tabla
+        plantillaTable.items = FXCollections.observableArrayList(viewModel.state.value.plantilla)
 
+        //Columnas
         idColumn.cellValueFactory = PropertyValueFactory("id")
         nombreColumn.cellValueFactory = PropertyValueFactory("nombre")
         apellidosColumn.cellValueFactory = PropertyValueFactory("apellidos")
@@ -236,14 +238,14 @@ class HelloController : KoinComponent {
 
         //Atajos del teclado
         menuCopiar.accelerator = KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN)
-        menuGuardar.accelerator = KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN)
         menuPegar.accelerator = KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_DOWN)
-        menuImportar.accelerator = KeyCodeCombination(KeyCode.M, KeyCombination.CONTROL_DOWN)
-        menuExportar.accelerator = KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN)
+        menuImportarJson.accelerator = KeyCodeCombination(KeyCode.J, KeyCombination.CONTROL_DOWN)
+        menuExportarJson.accelerator = KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN)
+        menuImportarZip.accelerator = KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN)
+        menuExportarZip.accelerator = KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN)
         menuHelp.accelerator = KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN)
 
         //Variables desactivadas al inicio de la app para imposibilitar el editarlas
-
         paisField.isDisable = true
         fechaIncorporacionField.isDisable = true
         fechaNacimientoField.isDisable = true
@@ -257,7 +259,8 @@ class HelloController : KoinComponent {
         pesoField.isDisable = true
         rolComboBox.isDisable = true
         posicionComboBox.isDisable = true
-        golePromedioField.isDisable = true
+        especialidadComboBox.isDisable = true
+        pesoMinimoField.isDisable = true
         salarioMaximoField.isDisable = true
         salarioPromedioField.isDisable = true
         AlturaMinimaField.isDisable = true
@@ -267,8 +270,6 @@ class HelloController : KoinComponent {
         fechaActualField.isDisable = true
         entrenadoresAsistentesField.isDisable = true
         entrenadoresEspañolesField.isDisable = true
-
-        golePromedioField.textProperty().bind(viewModel.state.map { it.golesPromedio.toString() })
 
         if (viewModel.state.value.jugador.isEmpty()) {
             println("No hay jugadores")
@@ -284,9 +285,104 @@ class HelloController : KoinComponent {
         val boxItemsFilter = listOf("Jugador", "Entrenador", "Todos")
         filterComboBox.items.addAll(boxItemsFilter)
 
-        //Opciones de la comboBox de entrenador
-        //Por hacer los campos comunes de entrenador (especialidad)
+        val boxItemsEspecialidad = listOf("ENTRENADOR_ASISTENTE", "ENTRENADOR_PORTEROS", "ENTRENADOR_PRINCIPAL")
+        especialidadComboBox.items.addAll(boxItemsEspecialidad)
+    }
 
+    fun initBindings(){
+//        //Valores de las consultas
+//        // también se puede hacer con Bindings.select
+//        textNotaMedia.textProperty().bind(Bindings.select(viewModel.state, "notaMedia"))
+//
+//        //Jugadores
+//        pesoMinimoField.textProperty().bind(viewModel.state.map{ it.pesoMinimo } as ObservableValue<String>)
+//        salarioMaximoField.textProperty().bind(viewModel.state.map { it.salarioMaximo } as ObservableValue<String>)
+//        AlturaMinimaField.textProperty().bind(viewModel.state.map { it.alturaMinima } as ObservableValue<String>)
+//        PartidosTotalField.textProperty().bind(viewModel.state.map { it.totalPartidos } as ObservableValue<String>)
+//        NumJugadoresField.textProperty().bind(viewModel.state.map { it.jugadoresTotal } as ObservableValue<String> )
+//
+//        //Entrenadores
+//        salarioPromedioField.textProperty().bind(viewModel.state.map { it.salarioPromedio } as ObservableValue<String>)
+//        fechaAntiguaField.textProperty().bind(viewModel.state.map{ it.incorporacionAntigua })
+//        fechaActualField.textProperty().bind(viewModel.state.map{ it.nacimientoActual })
+//        entrenadoresAsistentesField.textProperty().bind(viewModel.state.map { it.entrenadoresAsistentes } as ObservableValue<String>)
+//
+//        //General
+//        golesPromedioField.textProperty().bind(viewModel.state.map { it.golesPromedio } as ObservableValue<String>)
+//        minutosPromedioField.textProperty().bind(viewModel.state.map { it.minutosPromedio } as ObservableValue<String>)
+
+
+        //Valores de la plantila
+
+
+        //Tabla
+        viewModel.state.addListener{ _, _, newValue ->
+            if (plantillaTable.items != newValue.plantilla) {
+                plantillaTable.items = FXCollections.observableArrayList(newValue.plantilla)
+            }
+        }
+
+    }
+
+    fun initEvents() {
+        logger.debug { "Iniciando eventos" }
+
+        menuHelp.setOnAction { onHelpAction() }
+
+        menuSalir.setOnAction { RoutesManager.onAppExit() }
+
+        menuImportarZip.setOnAction {  }
+
+        menuExportarZip.setOnAction {  }
+
+        menuImportarJson.setOnAction {  }
+
+        menuExportarJson.setOnAction {  }
+
+        cambioUser.setOnAction { onLoginAction() }
+
+        añadirButton.setOnAction { onAddMemberAction()}
+
+        //Combo box de Tipo
+        filterComboBox.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            newValue?.let { onComboSelected(newValue) }
+        }
+
+        //Tabla
+        plantillaTable.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            newValue?.let { onTableSelected(newValue,) }
+        }
+
+        //Buscador
+        searchText.setOnKeyReleased { newValue ->
+            newValue?.let { onKeyReleasedAction() }
+        }
+
+    }
+
+    fun onLoginAction(){
+        TODO()
+    }
+
+    fun onHelpAction() {
+        logger.debug { "onHelpAction" }
+        RoutesManager.initHelpStage()
+    }
+
+    fun onTableSelected(newValue: Plantilla){
+        viewModel.updatePlantillaSelecionado(newValue)
+    }
+
+    fun onKeyReleasedAction(){
+        filterDataTable()
+    }
+
+    fun filterDataTable(){
+        plantillaTable.items = FXCollections.observableList(viewModel.plantillaFilteredList(filterComboBox.value, searchText.text.trim()))
+    }
+
+    fun onComboSelected(newValue: String){
+        filterDataTable()
     }
 
     fun onAddMemberAction() {
@@ -328,31 +424,32 @@ class HelloController : KoinComponent {
     //Automaticamente se activarán los botones de dicho rol para poder salvarlos o editarlos
     fun onComboBoxAction() {
         rolComboBox.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
-            if (newValue == "Jugador") {
-                posicionComboBox.isDisable = false
-                dorsalField.isDisable = false
-                alturaField.isDisable = false
-                pesoField.isDisable = false
-                golesField.isDisable = false
-                partidosField.isDisable = false
-            }
-            if (newValue == "Entrenador") {
-                //Field de entrenador
-                especialidadComboBox.isDisable = false
+            when (newValue) {
+                "Jugador" -> {
+                    //Field de jugador
+                    posicionComboBox.isDisable = false
+                    dorsalField.isDisable = false
+                    alturaField.isDisable = false
+                    pesoField.isDisable = false
+                    golesField.isDisable = false
+                    partidosField.isDisable = false
 
-                //Field de jugador
-                posicionComboBox.isDisable = true
-                dorsalField.isDisable = true
-                alturaField.isDisable = true
-                pesoField.isDisable = true
-                golesField.isDisable = true
-                partidosField.isDisable = true
+                    //Field de entrenador
+                    especialidadComboBox.isDisable = true
+                }
+                "Entrenador" -> {
+                    //Field de entrenador
+                    especialidadComboBox.isDisable = false
+
+                    //Field de jugador
+                    posicionComboBox.isDisable = true
+                    dorsalField.isDisable = true
+                    alturaField.isDisable = true
+                    pesoField.isDisable = true
+                    golesField.isDisable = true
+                    partidosField.isDisable = true
+                }
             }
         }
-    }
-
-    //POR IMPLEMENTAR
-    fun onSliderAction() {
-
     }
 }

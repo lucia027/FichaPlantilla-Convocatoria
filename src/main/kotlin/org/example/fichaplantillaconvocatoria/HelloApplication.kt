@@ -12,6 +12,9 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/*
+ * Clase que se encarga de inicar la aplicacion
+ */
 class HelloApplication : Application(), KoinComponent {
 
     init {

@@ -7,6 +7,9 @@ import javafx.scene.control.ProgressBar
 import javafx.util.Duration
 import org.example.fichaplantillaconvocatoria.routes.RoutesManager
 
+/*
+ * Clase que se encarga de cargar la splash screen
+ */
 class SplashController {
 
     @FXML

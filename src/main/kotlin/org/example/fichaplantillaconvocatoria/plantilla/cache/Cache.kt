@@ -7,9 +7,10 @@ import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
 import org.lighthousegames.logging.logging
 import java.util.concurrent.TimeUnit
 
+/*
+ * Funcion que configura los datos de la cache sacados de la configuracion.
+ */
 fun providePersonalCache(config : Config): Cache<Long, Plantilla> {
-    val logger = logging()
-    logger.debug { "Iniciando Cache Caffeine con capacidad ${config.cacheCapacity} y una duracion de ${config.cacheExpiration}" }
     return Caffeine.newBuilder()
         .maximumSize(config.cacheCapacity)
         .expireAfterWrite(config.cacheExpiration, TimeUnit.SECONDS).build()

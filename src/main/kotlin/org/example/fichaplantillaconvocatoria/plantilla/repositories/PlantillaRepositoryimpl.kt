@@ -8,11 +8,13 @@ import org.example.fichaplantillaconvocatoria.plantilla.mapper.toEntity
 import org.example.fichaplantillaconvocatoria.plantilla.models.Plantilla
 import org.lighthousegames.logging.logging
 
+/*
+ * Clase que implemneta las funciones de la interfaz del respositorio
+ */
 class PlantillaRepositoryImpl (
     val dao : PlantillaDao
 ) : PlantillaRepository {
 
-    private val plantilla = mutableMapOf<Long, Plantilla>()
     private val logger = logging()
 
     init {
@@ -38,19 +40,19 @@ class PlantillaRepositoryImpl (
     }
 
     //Para guardar un miembro
-    override fun save(item: Plantilla): Plantilla {
-        logger.debug { "Salvando miembro de la plantilla : $item" }
-        val entityToSave = item.toEntity() // Asume que ignora id porque es autogenerado
+    override fun save(plantilla: Plantilla): Plantilla {
+        logger.debug { "Salvando miembro de la plantilla : $plantilla" }
+        val entityToSave = plantilla.toEntity() // Asume que ignora id porque es autogenerado
         val generatedId = dao.save(entityToSave)
-        return item.copy(id = generatedId)
+        return plantilla.copy(id = generatedId)
     }
 
     //Función que borra el identificador de un miembro de la plantilla
-    override fun deleteById(id: Long) {
+    override fun deleteById(id: Long?) {
         logger.debug { "Eliminando miembro de la plantilla : $id" }
         val plantilla: Plantilla? = dao.findById(id)?.toModel()
         if (plantilla != null) {
-            val res = dao?.delete(id)
+            val res = dao.delete(id)
             if (res == 0L) {
                 logger.error { "Fallo al remover el miembro de la plantilla" }
             }
@@ -58,8 +60,8 @@ class PlantillaRepositoryImpl (
     }
 
     //Función que guarda todos los items en una lista
-    override fun saveAll(t: List<Plantilla>): List<Plantilla> {
-        return t.map { save(it) }
+    override fun saveAll(plantilla: List<Plantilla>): List<Plantilla> {
+        return plantilla.map { save(it) }
     }
 
     //Función que elimina toda la informacion sobre un miembro de la plantilla
